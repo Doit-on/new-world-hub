@@ -91,13 +91,34 @@
             color: var(--primary);
             letter-spacing: -0.3px;
             line-height: 1.2;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
         }
 
-        .brand-text span {
+        .brand-text > span,
+        #header-brand-subtitle {
             font-size: 0.82rem;
             color: var(--text-muted);
             display: block;
             font-weight: 500;
+        }
+
+        .brand-text .version-badge {
+            background: rgba(37, 99, 235, 0.12) !important;
+            color: var(--accent) !important;
+            border: 1px solid rgba(37, 99, 235, 0.3) !important;
+            font-size: 0.72rem !important;
+            font-weight: 800 !important;
+            padding: 2px 8px !important;
+            border-radius: var(--radius-full) !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            width: auto !important;
+            letter-spacing: 0.5px !important;
+            line-height: 1.2 !important;
+            vertical-align: middle !important;
         }
 
         .header-controls {
@@ -2155,7 +2176,7 @@
                 <span>🏠</span>
             </button>
 <div class="brand-text">
-                <h1>New World Smart Learning Hub <span class="version-badge" id="header-version-badge" style="font-size:0.7rem; vertical-align:middle;">v1.4.0</span></h1>
+                <h1>New World Smart Learning Hub <span class="version-badge" id="header-version-badge">v1.4.0</span></h1>
                 <span id="header-brand-subtitle">สำนักพิมพ์ไทยวัฒนาพานิช (ทวพ.) | หลักสูตรแกนกลางฯ 2551 (สพฐ.)</span>
             </div>
         </div>
