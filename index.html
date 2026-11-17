@@ -2109,7 +2109,12 @@
             <img src="New5.jpg" alt="Cover 5" onerror="this.onerror=null; this.src='3.png'">
             <img src="New6.jpg" alt="Cover 6" onerror="this.onerror=null; this.src='3.png'">
         </div>
-        <div class="landing-card">
+        <div class="landing-card" style="position:relative;">
+            <div style="position:absolute; top:18px; right:18px;">
+                <button class="btn-lang-toggle" id="landing-btn-lang" onclick="toggleLanguage()" title="Switch Language / สลับภาษา">
+                    🇬🇧 EN
+                </button>
+            </div>
             <div class="landing-logo-container" onclick="enterAppFromLanding()" title="แตะหรือคลิกที่โลโก้เพื่อเข้าสู่ระบบ">
                 <img src="3.png" alt="โลโก้สำนักพิมพ์ไทยวัฒนาพานิช" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'80\' height=\'80\' viewBox=\'0 0 80 80\'><rect width=\'80\' height=\'80\' rx=\'16\' fill=\'%231e293b\'/><text x=\'50%\' y=\'55%\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23ffffff\' font-family=\'sans-serif\' font-weight=\'bold\' font-size=\'24\'>ทวพ</text></svg>'">
             </div>
@@ -12925,25 +12930,25 @@ let currentBook = 1;
                     <div class="board-grid">
                         <div class="panel-box">
                             <h4>
-                                <span>🔊 กระดานเสียงบทสนทนา (AI Speech Dialogue Board)</span>
+                                <span>${currentLang === 'en' ? '🔊 Dialogue Audio Board (AI Speech)' : '🔊 กระดานเสียงบทสนทนา (AI Speech Dialogue Board)'}</span>
                                 <div class="speed-btn-group">
-                                    <button class="speed-btn ${currentSpeechRate === 0.75 ? 'active' : ''}" onclick="setAudioSpeed(0.75, this)">0.75x ช้า</button>
-                                    <button class="speed-btn ${currentSpeechRate === 1.0 ? 'active' : ''}" onclick="setAudioSpeed(1.0, this)">1.0x ปกติ</button>
+                                    <button class="speed-btn ${currentSpeechRate === 0.75 ? 'active' : ''}" onclick="setAudioSpeed(0.75, this)">${currentLang === 'en' ? '0.75x Slow' : '0.75x ช้า'}</button>
+                                    <button class="speed-btn ${currentSpeechRate === 1.0 ? 'active' : ''}" onclick="setAudioSpeed(1.0, this)">${currentLang === 'en' ? '1.0x Normal' : '1.0x ปกติ'}</button>
                                 </div>
                             </h4>
 
                             <div class="reading-synopsis-card">
-                                <strong>📖 บทความประจำบทเรียน: "${unit.reading}"</strong>
+                                <strong>${currentLang === 'en' ? '📖 Unit Reading Passage: "' + unit.reading + '"' : '📖 บทความประจำบทเรียน: "' + unit.reading + '"'}</strong>
                                 <span>${unit.readingSummary}</span>
                             </div>
 
                             <div class="synth-player">
                                 <div class="synth-controls">
                                     <button class="play-all-btn" id="btn-play-all" onclick="togglePlayAllDialogue()">
-                                        ▶ เล่นเสียงบทสนทนาทั้งบท
+                                        ${currentLang === 'en' ? '▶ Play Full Dialogue (Dual Voice)' : '▶ เล่นเสียงบทสนทนาทั้งบท'}
                                     </button>
                                     <span class="wave-indicator" id="audio-wave-status">
-                                        พร้อมเล่นเสียงสังเคราะห์แยกตัวละคร ชาย-หญิง (Dual Web Speech HD)
+                                        ${currentLang === 'en' ? 'Ready to play synthesized dual character speech (Male / Female)' : 'พร้อมเล่นเสียงสังเคราะห์แยกตัวละคร ชาย-หญิง (Dual Web Speech HD)'}
                                     </span>
                                 </div>
                             </div>
@@ -12951,28 +12956,28 @@ let currentBook = 1;
                             <!-- Dedicated Dual Character Voice Control Center on Dialogue Board -->
                             <div style="background:#f8fafc; border:1.5px solid #cbd5e1; border-radius:10px; padding:10px 14px; margin-bottom:14px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:10px;">
                                 <div style="font-size:0.88rem; font-weight:800; color:var(--primary); display:flex; align-items:center; gap:6px;">
-                                    <span>🎙️ ปรับเปลี่ยนเสียงตัวละคร (AI Voice Selector):</span>
+                                    <span>${currentLang === 'en' ? '🎙️ Character Voice Selector (Male/Female):' : '🎙️ ปรับเปลี่ยนเสียงตัวละคร (AI Voice Selector):'}</span>
                                 </div>
                                 <div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px;">
                                     <div style="display:flex; align-items:center; gap:6px; background:#eff6ff; padding:5px 10px; border-radius:6px; border:1px solid #93c5fd;">
-                                        <span style="font-size:0.82rem; font-weight:700; color:#1e40af;">👨 เสียงชาย:</span>
+                                        <span style="font-size:0.82rem; font-weight:700; color:#1e40af;">${currentLang === 'en' ? '👨 Male Voice:' : '👨 เสียงชาย:'}</span>
                                         <select id="dlg-voice-male-select" onchange="onUserChangeMaleVoice(this.value)" style="font-family:'Sarabun',sans-serif; font-size:0.82rem; border:none; outline:none; font-weight:700; color:#1d4ed8; background:transparent; cursor:pointer; max-width:160px;">
                                             <option value="">กำลังโหลดเสียงชาย...</option>
                                         </select>
-                                        <button class="speed-btn" onclick="testMaleVoice()" style="padding:2px 8px; font-size:0.75rem;" title="ฟังตัวอย่างเสียงชาย">🔊 ลอง</button>
+                                        <button class="speed-btn" onclick="testMaleVoice()" style="padding:2px 8px; font-size:0.75rem;" title="Test Male Voice">${currentLang === 'en' ? '🔊 Test' : '🔊 ลอง'}</button>
                                     </div>
                                     <div style="display:flex; align-items:center; gap:6px; background:#fdf2f8; padding:5px 10px; border-radius:6px; border:1px solid #f9a8d4;">
-                                        <span style="font-size:0.82rem; font-weight:700; color:#9d174d;">👩 เสียงหญิง:</span>
+                                        <span style="font-size:0.82rem; font-weight:700; color:#9d174d;">${currentLang === 'en' ? '👩 Female Voice:' : '👩 เสียงหญิง:'}</span>
                                         <select id="dlg-voice-female-select" onchange="onUserChangeFemaleVoice(this.value)" style="font-family:'Sarabun',sans-serif; font-size:0.82rem; border:none; outline:none; font-weight:700; color:#be185d; background:transparent; cursor:pointer; max-width:160px;">
                                             <option value="">กำลังโหลดเสียงหญิง...</option>
                                         </select>
-                                        <button class="speed-btn" onclick="testFemaleVoice()" style="padding:2px 8px; font-size:0.75rem;" title="ฟังตัวอย่างเสียงหญิง">🔊 ลอง</button>
+                                        <button class="speed-btn" onclick="testFemaleVoice()" style="padding:2px 8px; font-size:0.75rem;" title="Test Female Voice">${currentLang === 'en' ? '🔊 Test' : '🔊 ลอง'}</button>
                                     </div>
                                 </div>
                             </div>
 
                             <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:10px;">
-                                💡 กดที่ปุ่ม "▶ เล่นเสียงบทสนทนาทั้งบท" ด้านบน หรือกดที่ประโยคด้านล่างเพื่อฟังเสียงเดี่ยว (จำแนกเสียงตามเพศตัวละคร 👨 ชาย / 👩 หญิง อัตโนมัติ):
+                                ${currentLang === 'en' ? '💡 Click "▶ Play Full Dialogue" or click any individual line below to listen (Dual Male 👨 / Female 👩 voice):' : '💡 กดที่ปุ่ม "▶ เล่นเสียงบทสนทนาทั้งบท" ด้านบน หรือกดที่ประโยคด้านล่างเพื่อฟังเสียงเดี่ยว (จำแนกเสียงตามเพศตัวละคร 👨 ชาย / 👩 หญิง อัตโนมัติ):'}
                             </p>
 
                             <div class="dialogue-list">
@@ -12995,7 +13000,7 @@ let currentBook = 1;
                                                     <span class="speaker-badge ${badgeClass}">${gIcon} ${displayName}</span>
                                                     <span style="font-weight:500;">${cleanText}</span>
                                                 </div>
-                                                <span class="listen-pill">▶ ฟังเสียง${gender === 'male' ? 'ชาย' : 'หญิง'}</span>
+                                                <span class="listen-pill">${currentLang === 'en' ? ('▶ Listen (' + (gender === 'male' ? 'Male' : 'Female') + ')') : ('▶ ฟังเสียง' + (gender === 'male' ? 'ชาย' : 'หญิง'))}</span>
                                             </div>
                                         `;
                                     }).join('');
@@ -13005,28 +13010,28 @@ let currentBook = 1;
 
                         <div class="panel-box">
                             <h4>
-                                <span>✅ เฉลยแบบฝึกหัดประจำบท (Answer Key)</span>
+                                <span>${currentLang === 'en' ? '✅ Unit Exercise Answer Key' : '✅ เฉลยแบบฝึกหัดประจำบท (Answer Key)'}</span>
                                 <button class="btn-outline" onclick="toggleAllAnswers()">
-                                    👁️ เปิด / ซ่อน เฉลยทั้งหมด
+                                    ${currentLang === 'en' ? '👁️ Reveal / Hide All Answers' : '👁️ เปิด / ซ่อน เฉลยทั้งหมด'}
                                 </button>
                             </h4>
                             <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:14px;">
-                                แบบฝึกหัดในชั้นเรียนได้รับการเบลอไว้ เพื่อให้ครูใช้โจทย์ถามนักเรียนก่อนเปิดเฉลยทีละข้อตามจังหวะการสอน:
+                                ${currentLang === 'en' ? 'Classroom exercises are blurred so teachers can prompt students before revealing answers step by step:' : 'แบบฝึกหัดในชั้นเรียนได้รับการเบลอไว้ เพื่อให้ครูใช้โจทย์ถามนักเรียนก่อนเปิดเฉลยทีละข้อตามจังหวะการสอน:'}
                             </p>
                             <div class="answer-list">
                                 ${unit.exercises ? unit.exercises.map((ex, idx) => `
                                     <div class="answer-item" style="flex-direction:column; align-items:stretch; gap:8px;">
                                         <div style="display:flex; justify-content:space-between; align-items:center;">
-                                            <span class="answer-num" style="color:var(--accent); font-weight:800;">ข้อที่ ${idx + 1}</span>
+                                            <span class="answer-num" style="color:var(--accent); font-weight:800;">${currentLang === 'en' ? 'Item ' + (idx + 1) : 'ข้อที่ ' + (idx + 1)}</span>
                                             <button class="btn-outline" style="padding:4px 10px; font-size:0.8rem;" onclick="toggleAnswerItem(${idx})">
-                                                เฉลยข้อนี้
+                                                ${currentLang === 'en' ? 'Reveal Answer' : 'เฉลยข้อนี้'}
                                             </button>
                                         </div>
                                         <div style="font-size:0.9rem; color:var(--primary);">
-                                            ❓ <strong>โจทย์ถามนักเรียน:</strong> ${ex.q}
+                                            ❓ <strong>${currentLang === 'en' ? 'Question Prompt:' : 'โจทย์ถามนักเรียน:'}</strong> ${ex.q}
                                         </div>
                                         <div class="answer-blur" id="blur-ans-${idx}" style="font-size:0.92rem;">
-                                            <strong>เฉลย:</strong> ${ex.a}
+                                            <strong>${currentLang === 'en' ? 'Answer Key:' : 'เฉลย:'}</strong> ${ex.a}
                                         </div>
                                     </div>
                                 `).join('') : unit.answers.map((ans, idx) => `
@@ -13041,8 +13046,8 @@ let currentBook = 1;
                             </div>
 
                             <div style="margin-top:20px; padding:14px; background:#f1f5f9; border-radius:8px; font-size:0.86rem; color:var(--text-muted);">
-                                <strong>💡 คู่มือครูผู้สอน (Teacher Tip):</strong>
-                                เน้นย้ำโครงสร้าง <em>${unit.grammar}</em> ให้นักเรียนฝึกออกเสียงประโยคปฏิเสธและคำถามซ้ำ เพื่อสร้างความมั่นใจก่อนทำแบบทดสอบ
+                                <strong>${currentLang === 'en' ? '💡 Teacher Instructional Tip:' : '💡 คู่มือครูผู้สอน (Teacher Tip):'}</strong>
+                                ${currentLang === 'en' ? ('Emphasize target structure: <em>' + unit.grammar + '</em>. Have students practice affirmative, negative, and question patterns to build confidence before the test.') : ('เน้นย้ำโครงสร้าง <em>' + unit.grammar + '</em> ให้นักเรียนฝึกออกเสียงประโยคปฏิเสธและคำถามซ้ำ เพื่อสร้างความมั่นใจก่อนทำแบบทดสอบ')}
                             </div>
                         </div>
                     </div>
@@ -13060,37 +13065,37 @@ let currentBook = 1;
                         <!-- 3D Smart Flashcard Column -->
                         <div class="panel-box">
                             <h4>
-                                <span>🗂️ Smart Flashcards (บัตรคำศัพท์อัจฉริยะ)</span>
-                                <span style="font-size:0.82rem; color:var(--accent); font-weight:700;">(คลิกที่บัตรเพื่อพลิกดูคำแปล)</span>
+                                <span>${currentLang === 'en' ? '🗂️ Smart 3D Flashcards' : '🗂️ Smart Flashcards (บัตรคำศัพท์อัจฉริยะ)'}</span>
+                                <span style="font-size:0.82rem; color:var(--accent); font-weight:700;">${currentLang === 'en' ? '(Click card to flip definition)' : '(คลิกที่บัตรเพื่อพลิกดูคำแปล)'}</span>
                             </h4>
                             <p style="font-size:0.86rem; color:var(--text-muted); margin-bottom:12px;">
-                                แตะหรือคลิกที่ตัวบัตรคำเพื่อพลิกสลับระหว่างคำศัพท์ภาษาอังกฤษและคำแปลภาษาไทย:
+                                ${currentLang === 'en' ? 'Tap or click the card to flip between English word and definition:' : 'แตะหรือคลิกที่ตัวบัตรคำเพื่อพลิกสลับระหว่างคำศัพท์ภาษาอังกฤษและคำแปลภาษาไทย:'}
                             </p>
 
                             <div class="flashcard-stage">
                                 <div class="flashcard-card" id="flashcard-card" onclick="this.classList.toggle('flipped')">
                                     <div class="flashcard-face flashcard-front">
                                         <div class="word-display" id="fc-word">${activeVocab.w}</div>
-                                        <div class="card-hint">🔄 คลิกเพื่อพลิกดูคำแปลภาษาไทย</div>
+                                        <div class="card-hint">${currentLang === 'en' ? '🔄 Click to flip for definition' : '🔄 คลิกเพื่อพลิกดูคำแปลภาษาไทย'}</div>
                                     </div>
                                     <div class="flashcard-face flashcard-back">
                                         <div class="meaning-display" id="fc-meaning">${activeVocab.m}</div>
-                                        <div class="card-hint">🔄 คลิกเพื่อพลิกกลับด้านหน้า</div>
+                                        <div class="card-hint">${currentLang === 'en' ? '🔄 Click to flip to front' : '🔄 คลิกเพื่อพลิกกลับด้านหน้า'}</div>
                                     </div>
                                 </div>
                             </div>
 
                             <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-top:14px;">
                                 <button class="btn-outline" onclick="speakText(document.getElementById('fc-word').innerText)">
-                                    🔊 ฟังเสียงอ่านคำศัพท์
+                                    ${currentLang === 'en' ? '🔊 Listen to Word' : '🔊 ฟังเสียงอ่านคำศัพท์'}
                                 </button>
                                 <button class="btn-outline" onclick="flipCurrentCard()">
-                                    🔄 พลิกบัตรคำ
+                                    ${currentLang === 'en' ? '🔄 Flip Card' : '🔄 พลิกบัตรคำ'}
                                 </button>
                             </div>
 
                             <div style="font-size:0.86rem; font-weight:700; color:var(--primary); margin-top:16px; margin-bottom:8px;">
-                                เลือกคำศัพท์ในบทเรียน (Unit ${unit.u}):
+                                ${currentLang === 'en' ? ('Select Unit Vocabulary (Unit ' + unit.u + '):') : ('เลือกคำศัพท์ในบทเรียน (Unit ' + unit.u + '):')}
                             </div>
                             <div class="vocab-pills-row">
                                 ${unit.vocab.map((v, idx) => `
@@ -13104,22 +13109,22 @@ let currentBook = 1;
                         <!-- AI Pronunciation Coach Column with 3 Sentences -->
                         <div class="panel-box">
                             <h4>
-                                <span>🎙️ AI Pronunciation Coach (ฝึกออกเสียงผ่านไมค์)</span>
-                                <span style="font-size:0.8rem; color:var(--success); font-weight:700;">● ระบบบันทึกเสียงสด</span>
+                                <span>${currentLang === 'en' ? '🎙️ AI Pronunciation Coach (Mic Practice)' : '🎙️ AI Pronunciation Coach (ฝึกออกเสียงผ่านไมค์)'}</span>
+                                <span style="font-size:0.8rem; color:var(--success); font-weight:700;">${currentLang === 'en' ? '● Live Audio Recording Engine' : '● ระบบบันทึกเสียงสด'}</span>
                             </h4>
                             <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:12px;">
-                                เลือก 1 ใน 3 ประโยคประจำบทเพื่อฝึกอ่านออกเสียงตามครูต้นแบบ:
+                                ${currentLang === 'en' ? 'Select 1 of 3 target sentences to practice pronouncing after native speaker:' : 'เลือก 1 ใน 3 ประโยคประจำบทเพื่อฝึกอ่านออกเสียงตามครูต้นแบบ:'}
                             </p>
 
                             <div class="mic-box">
                                 <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
                                     <span style="font-size:0.86rem; font-weight:800; color:var(--primary); text-transform:uppercase;">
-                                        🎯 เลือกประโยคฝึกพูด (3 ประโยคประจำบท):
+                                        ${currentLang === 'en' ? '🎯 Select Target Sentence (3 sentences per unit):' : '🎯 เลือกประโยคฝึกพูด (3 ประโยคประจำบท):'}
                                     </span>
                                     <div style="display:inline-flex; gap:6px;">
-                                        <button class="speed-btn coach-sentence-pill ${activeCoachSentenceIndex === 0 ? 'active' : ''}" onclick="selectCoachSentence(0)">ประโยค 1</button>
-                                        <button class="speed-btn coach-sentence-pill ${activeCoachSentenceIndex === 1 ? 'active' : ''}" onclick="selectCoachSentence(1)">ประโยค 2</button>
-                                        <button class="speed-btn coach-sentence-pill ${activeCoachSentenceIndex === 2 ? 'active' : ''}" onclick="selectCoachSentence(2)">ประโยค 3</button>
+                                        <button class="speed-btn coach-sentence-pill ${activeCoachSentenceIndex === 0 ? 'active' : ''}" onclick="selectCoachSentence(0)">${currentLang === 'en' ? 'Sentence 1' : 'ประโยค 1'}</button>
+                                        <button class="speed-btn coach-sentence-pill ${activeCoachSentenceIndex === 1 ? 'active' : ''}" onclick="selectCoachSentence(1)">${currentLang === 'en' ? 'Sentence 2' : 'ประโยค 2'}</button>
+                                        <button class="speed-btn coach-sentence-pill ${activeCoachSentenceIndex === 2 ? 'active' : ''}" onclick="selectCoachSentence(2)">${currentLang === 'en' ? 'Sentence 3' : 'ประโยค 3'}</button>
                                     </div>
                                 </div>
 
@@ -13155,7 +13160,7 @@ let currentBook = 1;
                                             🔊 ฟังครูเทียบ
                                         </button>
                                         <button class="btn-outline" onclick="clearStudentAudioMemory(true)" style="color:#ef4444; border-color:#fca5a5; font-size:0.82rem;" title="ล้างข้อมูลเสียงจาก RAM">
-                                            🗑️ ล้างเสียง (Free RAM)
+                                            ${currentLang === 'en' ? '🗑️ Reset Audio (Free RAM)' : '🗑️ ล้างเสียง (Free RAM)'}
                                         </button>
                                     </div>
                                     <div style="margin-top:8px; font-size:0.78rem; color:#047857;">
@@ -13196,13 +13201,13 @@ let currentBook = 1;
                                 </span>
                             </div>
                             <span style="font-size:0.88rem; color:var(--text-muted);">
-                                ความก้าวหน้า: <strong>${answeredCount} / 5 ข้อ</strong> (ถูก ${correctCount} ข้อ)
+                                ${currentLang === 'en' ? ('Progress: <strong>' + answeredCount + ' / 5 Questions</strong> (' + correctCount + ' Correct)') : ('ความก้าวหน้า: <strong>' + answeredCount + ' / 5 ข้อ</strong> (ถูก ' + correctCount + ' ข้อ)')}
                             </span>
                         </div>
 
                         <!-- 5 Question Navigation Pills -->
                         <div class="exam-pills-bar">
-                            <span style="font-size:0.86rem; font-weight:700; color:var(--text-muted); margin-right:4px;">เลือกข้อสอบ:</span>
+                            <span style="font-size:0.86rem; font-weight:700; color:var(--text-muted); margin-right:4px;">${currentLang === 'en' ? 'Select Question:' : 'เลือกข้อสอบ:'}</span>
                             ${questions.map((qItem, qIdx) => {
                                 const ansRecord = userExamAnswers[unitKey][qIdx];
                                 let statusClass = '';
@@ -13219,7 +13224,7 @@ let currentBook = 1;
                                 if (qIdx === currentExamQIndex) statusClass += ' active';
                                 return `
                                     <button class="exam-pill-btn ${statusClass}" onclick="selectExamQuestion(${qIdx})">
-                                        ${icon}ข้อ ${qIdx + 1}
+                                        ${icon}${currentLang === 'en' ? ('Q' + (qIdx + 1)) : ('ข้อ ' + (qIdx + 1))}
                                     </button>
                                 `;
                             }).join('')}
@@ -13227,12 +13232,12 @@ let currentBook = 1;
 
                         <!-- Category Tag Chip -->
                         <div class="category-tag-chip">
-                            🎯 หมวดการวัดผล: <strong>${currentQ.categoryLabel}</strong>
+                            ${currentLang === 'en' ? '🎯 Assessment Category: ' : '🎯 หมวดการวัดผล: '}<strong>${currentQ.categoryLabel}</strong>
                         </div>
 
                         <!-- Question Text -->
                         <div class="exam-question-text">
-                            <strong>คำถามข้อที่ ${currentExamQIndex + 1}:</strong> ${currentQ.q}
+                            <strong>${currentLang === 'en' ? 'Question ' + (currentExamQIndex + 1) + ':' : 'คำถามข้อที่ ' + (currentExamQIndex + 1) + ':'}</strong> ${currentQ.q}
                         </div>
 
                         <!-- Options Grid -->
@@ -13260,9 +13265,9 @@ let currentBook = 1;
                             ${currentAnsRecord ? `
                                 <div style="background:${currentAnsRecord.isCorrect ? '#ecfdf5' : '#fef2f2'}; border:1px solid ${currentAnsRecord.isCorrect ? '#a7f3d0' : '#fecaca'}; color:${currentAnsRecord.isCorrect ? '#065f46' : '#991b1b'}; padding:14px; border-radius:8px;">
                                     <div style="font-size:1.05rem; font-weight:800; margin-bottom:4px;">
-                                        ${currentAnsRecord.isCorrect ? '✅ ถูกต้องสมบูรณ์!' : '❌ ยังไม่ถูกต้อง (คำตอบที่ถูกต้องคือข้อ ' + String.fromCharCode(65 + currentQ.ans) + ')'}
+                                        ${currentLang === 'en' ? (currentAnsRecord.isCorrect ? '✅ Correct Answer!' : '❌ Incorrect (The correct answer is Option ' + String.fromCharCode(65 + currentQ.ans) + ')') : (currentAnsRecord.isCorrect ? '✅ ถูกต้องสมบูรณ์!' : '❌ ยังไม่ถูกต้อง (คำตอบที่ถูกต้องคือข้อ ' + String.fromCharCode(65 + currentQ.ans) + ')')}
                                     </div>
-                                    <div><strong>คำอธิบายเฉลย:</strong> ${currentQ.exp}</div>
+                                    <div><strong>${currentLang === 'en' ? 'Explanation:' : 'คำอธิบายเฉลย:'}</strong> ${currentQ.exp}</div>
                                 </div>
                             ` : ''}
                         </div>
@@ -13271,14 +13276,14 @@ let currentBook = 1;
                         <div style="margin-top:20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
                             <div style="display:flex; gap:8px;">
                                 <button class="btn-outline" onclick="prevExamQuestion()" ${currentExamQIndex === 0 ? 'disabled style="opacity:0.5; cursor:not-allowed;"' : ''}>
-                                    ⬅️ ข้อก่อนหน้า
+                                    ${currentLang === 'en' ? '⬅️ Previous' : '⬅️ ข้อก่อนหน้า'}
                                 </button>
                                 <button class="btn-outline" onclick="nextExamQuestion()" ${currentExamQIndex === questions.length - 1 ? 'disabled style="opacity:0.5; cursor:not-allowed;"' : ''}>
-                                    ข้อถัดไป ➡️
+                                    ${currentLang === 'en' ? 'Next ➡️' : 'ข้อถัดไป ➡️'}
                                 </button>
                             </div>
                             <button class="btn-outline" onclick="resetExamQuestion()">
-                                🔄 ทำข้อนี้ใหม่
+                                ${currentLang === 'en' ? '🔄 Retry Question' : '🔄 ทำข้อนี้ใหม่'}
                             </button>
                         </div>
 
@@ -13288,14 +13293,14 @@ let currentBook = 1;
                                 <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
                                     <div>
                                         <div style="font-size:1.15rem; font-weight:800; color:#065f46;">
-                                            🏆 ทำแบบทดสอบครบ 5 ข้อแล้ว!
+                                            ${currentLang === 'en' ? '🏆 All 5 Questions Completed!' : '🏆 ทำแบบทดสอบครบ 5 ข้อแล้ว!'}
                                         </div>
                                         <div style="font-size:0.95rem; color:#047857; margin-top:2px;">
-                                            ได้คะแนน: <strong>${correctCount} / 5 ข้อ</strong> (${((correctCount/5)*100).toFixed(0)}%) • ข้อสอบสอดคล้องกับกรอบ O-NET และ CEFR ${bookData.cefr.split(' ')[0]}
+                                            ${currentLang === 'en' ? ('Score Achieved: <strong>' + correctCount + ' / 5 Questions</strong> (' + ((correctCount/5)*100).toFixed(0) + '%) • Aligned with O-NET and CEFR ' + bookData.cefr.split(' ')[0]) : ('ได้คะแนน: <strong>' + correctCount + ' / 5 ข้อ</strong> (' + ((correctCount/5)*100).toFixed(0) + '%) • ข้อสอบสอดคล้องกับกรอบ O-NET และ CEFR ' + bookData.cefr.split(' ')[0])}
                                         </div>
                                     </div>
                                     <button class="btn-primary" onclick="goToProgressDashboard()" style="background:#059669; font-size:0.95rem; padding:10px 22px;">
-                                        📊 ไปดูการวิเคราะห์จุดเด่น-จุดอ่อน (Dashboard) ➔
+                                        ${currentLang === 'en' ? '📊 View Diagnostic Analysis (Dashboard) ➔' : '📊 ไปดูการวิเคราะห์จุดเด่น-จุดอ่อน (Dashboard) ➔'}
                                     </button>
                                 </div>
                             </div>
@@ -13435,7 +13440,7 @@ let currentBook = 1;
                         <!-- Progress Bars by Domain -->
                         <div class="progress-bar-container">
                             <div class="progress-label-row">
-                                <span>📖 1. การอ่านจับใจความ (Reading Comprehension) • เรื่อง: <em>${unit.reading}</em></span>
+                                <span>${currentLang === 'en' ? '📖 1. Reading Comprehension' : '📖 1. การอ่านจับใจความ (Reading Comprehension)'} • เรื่อง: <em>${unit.reading}</em></span>
                                 <span style="font-weight:800; color:${readingScore >= 70 ? 'var(--success)' : 'var(--danger)'};">${readingScore}%</span>
                             </div>
                             <div class="progress-track">
@@ -13465,7 +13470,7 @@ let currentBook = 1;
 
                         <div class="progress-bar-container">
                             <div class="progress-label-row">
-                                <span>💬 4. บทสนทนาและการสื่อสารทางสังคม (Social & Situational English)</span>
+                                <span>${currentLang === 'en' ? '💬 4. Situational & Social Dialogue' : '💬 4. บทสนทนาและการสื่อสารทางสังคม (Social & Situational English)'}</span>
                                 <span style="font-weight:800; color:${dialogueScore >= 70 ? 'var(--success)' : 'var(--danger)'};">${dialogueScore}%</span>
                             </div>
                             <div class="progress-track">
@@ -13477,7 +13482,7 @@ let currentBook = 1;
                         <div style="margin-top:20px; display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
                             <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; padding:14px 18px;">
                                 <div style="font-weight:800; color:#166534; font-size:0.96rem; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
-                                    <span>🌟 จุดเด่นของผู้เรียน (Identified Strengths)</span>
+                                    <span>${currentLang === 'en' ? '🌟 Identified Strengths' : '🌟 จุดเด่นของผู้เรียน (Identified Strengths)'}</span>
                                 </div>
                                 <ul style="margin:0; padding-left:18px; font-size:0.88rem; color:#14532d; line-height:1.6;">
                                     ${strengths.map(s => `<li>${s}</li>`).join('')}
@@ -13486,7 +13491,7 @@ let currentBook = 1;
 
                             <div style="background:#fffbeb; border:1px solid #fef08a; border-radius:8px; padding:14px 18px;">
                                 <div style="font-weight:800; color:#854d0e; font-size:0.96rem; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
-                                    <span>💡 ข้อเสนอแนะเพื่อการพัฒนา (Actionable Recommendations)</span>
+                                    <span>${currentLang === 'en' ? '💡 Actionable Recommendations' : '💡 ข้อเสนอแนะเพื่อการพัฒนา (Actionable Recommendations)'}</span>
                                 </div>
                                 <ul style="margin:0; padding-left:18px; font-size:0.88rem; color:#713f12; line-height:1.6;">
                                     ${improvements.map(im => `<li>${im}</li>`).join('')}
@@ -13496,7 +13501,7 @@ let currentBook = 1;
 
                         <div style="margin-top:18px; text-align:right;">
                             <button class="btn-outline" onclick="selectTool(3)">
-                                🔄 ทำแบบทดสอบในกลุ่มที่ 3 ซ้ำเพื่อปรับปรุงคะแนน
+                                ${currentLang === 'en' ? '🔄 Retake Exam in Group 3 to Improve Score' : '🔄 ทำแบบทดสอบในกลุ่มที่ 3 ซ้ำเพื่อปรับปรุงคะแนน'}
                             </button>
                         </div>
                     </div>
@@ -13690,6 +13695,7 @@ let currentBook = 1;
             });
         }
 
+        
         function flipCurrentCard() {
             playChime('click');
             const card = document.getElementById('flashcard-card') || document.getElementById('active-flashcard');
@@ -13894,53 +13900,267 @@ let currentBook = 1;
             renderWorkspace();
         }
 
+        
         function applyLanguageToUI() {
+            const isEn = (currentLang === 'en');
+            
+            // Header button
             const langBtn = document.getElementById('header-btn-lang');
             if (langBtn) {
-                langBtn.innerHTML = (currentLang === 'th') ? '🇬🇧 EN' : '🇹🇭 TH';
+                langBtn.innerHTML = isEn ? '🇹🇭 TH' : '🇬🇧 EN';
             }
+
+            // Academic modal button
             const academicTxt = document.getElementById('txt-academic-btn');
-            if (academicTxt) academicTxt.innerText = t('academicBtn');
+            if (academicTxt) academicTxt.innerText = isEn ? 'Standards & CEFR' : 'มาตรฐานหลักสูตร & CEFR';
 
+            // Classroom button
             const classroomTxt = document.getElementById('txt-classroom-btn');
-            if (classroomTxt) classroomTxt.innerText = t('classroomBtn');
+            if (classroomTxt) classroomTxt.innerText = isEn ? 'Live Classroom' : 'ห้องเรียนสด (Live Room)';
 
-            // Sync Tool Tabs
+            // Header brand subtitle
+            const brandSub = document.querySelector('.brand-text span');
+            if (brandSub) {
+                brandSub.innerText = isEn 
+                    ? 'Thai Watana Panich (TWP) | Basic Education Core Curriculum B.E. 2551 (OBEC)'
+                    : 'สำนักพิมพ์ไทยวัฒนาพานิช (ทวพ.) | หลักสูตรแกนกลางฯ 2551 (สพฐ.)';
+            }
+
+            // Voice labels in header
+            const maleVoiceCapsule = document.getElementById('voice-select-male-dropdown');
+            if (maleVoiceCapsule && maleVoiceCapsule.previousElementSibling) {
+                maleVoiceCapsule.previousElementSibling.innerText = isEn ? '👨 Male Voice:' : '👨 เสียงชาย:';
+            }
+            const femaleVoiceCapsule = document.getElementById('voice-select-dropdown');
+            if (femaleVoiceCapsule && femaleVoiceCapsule.previousElementSibling) {
+                femaleVoiceCapsule.previousElementSibling.innerText = isEn ? '👩 Female Voice:' : '👩 เสียงหญิง:';
+            }
+            document.querySelectorAll('.header-controls .audio-status-badge span:last-child').forEach(s => {
+                s.innerText = isEn ? 'Test' : 'ลอง';
+            });
+
+            // Role switch buttons
+            const roleTeacher = document.getElementById('btn-role-teacher');
+            if (roleTeacher) roleTeacher.querySelector('span:last-child').innerText = isEn ? 'Teacher' : 'ครู';
+            const roleStudent = document.getElementById('btn-role-student');
+            if (roleStudent) roleStudent.querySelector('span:last-child').innerText = isEn ? 'Student' : 'นักเรียน';
+
+            // Menu drawer button
+            const menuDrawer = document.querySelector('.btn-menu-drawer');
+            if (menuDrawer) {
+                const s = menuDrawer.querySelector('span:last-child');
+                if (s) s.innerText = isEn ? 'Menu' : 'เมนู';
+            }
+
+            // Sidebar header and titles
+            const sidebarHeader = document.querySelector('.sidebar-header-row .sidebar-text');
+            if (sidebarHeader) sidebarHeader.innerText = isEn ? 'Index & Menu' : 'สารบัญ & เมนู';
+
+            const sidebarSections = document.querySelectorAll('.sidebar-section-title');
+            if (sidebarSections[0]) sidebarSections[0].innerText = isEn ? 'Book Levels:' : 'ระดับชั้น (Book Level):';
+            if (sidebarSections[1]) sidebarSections[1].innerText = isEn ? '4 Learning Pillars:' : '4 เสาหลักการเรียนรู้:';
+
+            // Sidebar mini books
+            const gradeLabels = ['Grade 7', 'Grade 8', 'Grade 9', 'Grade 10', 'Grade 11', 'Grade 12'];
+            const thaiGradeLabels = ['ม.1', 'ม.2', 'ม.3', 'ม.4', 'ม.5', 'ม.6'];
+            for (let b = 1; b <= 6; b++) {
+                const el = document.getElementById('sidebar-book-' + b);
+                if (el) {
+                    const titleEl = el.querySelector('.book-title');
+                    if (titleEl) titleEl.innerText = isEn ? `New World ${b} (${gradeLabels[b-1]})` : `New World ${b} (${thaiGradeLabels[b-1]})`;
+                }
+            }
+
+            // Sidebar mini tool buttons
+            const tool1 = document.getElementById('sidebar-tool-1');
+            if (tool1) {
+                tool1.querySelector('.tool-num').innerText = isEn ? 'Group 1 • Teacher' : 'กลุ่ม 1 • ครูผู้สอน';
+                tool1.querySelector('.tool-name').innerText = isEn ? 'Audio & Answer Board' : 'Audio & Answer Board';
+            }
+            const tool2 = document.getElementById('sidebar-tool-2');
+            if (tool2) {
+                tool2.querySelector('.tool-num').innerText = isEn ? 'Group 2 • Student' : 'กลุ่ม 2 • นักเรียน';
+                tool2.querySelector('.tool-name').innerText = isEn ? 'Flashcards & AI Coach' : 'Flashcards & AI Coach';
+            }
+            const tool3 = document.getElementById('sidebar-tool-3');
+            if (tool3) {
+                tool3.querySelector('.tool-num').innerText = isEn ? 'Group 3 • Assessment' : 'กลุ่ม 3 • มาตรฐานสอบ';
+                tool3.querySelector('.tool-name').innerText = isEn ? 'O-NET / CEFR Exam Hub' : 'O-NET / CEFR Exam Hub';
+            }
+            const tool4 = document.getElementById('sidebar-tool-4');
+            if (tool4) {
+                tool4.querySelector('.tool-num').innerText = isEn ? 'Group 4 • Analytics' : 'กลุ่ม 4 • วิเคราะห์ผล';
+                tool4.querySelector('.tool-name').innerText = isEn ? 'Progress Dashboard' : 'Progress Dashboard';
+            }
+
+            // Step 1: Book Selection Header
+            const step1Title = document.querySelector('.section-header h3');
+            if (step1Title) {
+                step1Title.innerText = isEn 
+                    ? '1. Select New World Student Book (Grades 7 - 12)'
+                    : '1. เลือกระดับชั้นหนังสือเรียน New World (ม.1 - ม.6)';
+            }
+            const step1Sub = document.querySelector('.section-header p');
+            if (step1Sub) {
+                step1Sub.innerText = isEn 
+                    ? 'Click any book cover to switch level and load units 1 - 12'
+                    : 'คลิกที่หน้าปกหนังสือเพื่อสลับระดับชั้นและโหลดบทเรียน 1-12 ของเล่มนั้น';
+            }
+
+            // Book Cards Level titles and active pills
+            for (let b = 1; b <= 6; b++) {
+                const card = document.getElementById('book-card-' + b);
+                if (card) {
+                    const titleEl = card.querySelector('.level-title');
+                    if (titleEl) titleEl.innerText = isEn ? `New World ${b} (${gradeLabels[b-1]})` : `New World ${b} (${thaiGradeLabels[b-1]})`;
+                    const pillEl = card.querySelector('.active-pill');
+                    if (pillEl) pillEl.innerText = isEn ? 'Active' : 'กำลังเลือก';
+                }
+            }
+
+            // Active Book Indicator
+            const ind = document.getElementById('active-book-indicator');
+            if (ind && newWorldDB && newWorldDB[currentBook]) {
+                ind.innerText = (isEn ? 'Now Viewing: ' : 'กำลังแสดง: ') + (isEn ? `New World ${currentBook} (${gradeLabels[currentBook-1]})` : newWorldDB[currentBook].title);
+            }
+
+            // Unit Nav Controls
+            const prevUnitBtn = document.querySelector('.unit-nav-controls .unit-arrow-btn:first-child');
+            if (prevUnitBtn) prevUnitBtn.innerText = isEn ? '◀ Previous Unit' : '◀ บทก่อนหน้า';
+            const unitLabel = document.querySelector('.unit-nav-controls label');
+            if (unitLabel) unitLabel.innerText = isEn ? 'Unit:' : 'บทเรียน (Unit):';
+            const nextUnitBtn = document.querySelector('.unit-nav-controls .unit-arrow-btn:last-child');
+            if (nextUnitBtn) nextUnitBtn.innerText = isEn ? 'Next Unit ▶' : 'บทถัดไป ▶';
+
+            // 4 Tool Tabs
             const t1 = document.getElementById('tool-tab-1');
             if (t1) {
-                t1.querySelector('.tab-pillar-badge').innerText = t('pillar1Badge');
-                t1.querySelector('strong').innerText = t('pillar1Title');
-                t1.querySelector('.desc').innerText = t('pillar1Desc');
+                t1.querySelector('.tab-pillar-badge').innerText = isEn ? 'Group 1 • Teacher' : 'กลุ่มที่ 1 • ครูผู้สอน';
+                t1.querySelector('strong').innerText = isEn ? '💬 Audio & Answer Board' : '💬 Audio & Answer Board';
+                t1.querySelector('.desc').innerText = isEn ? 'Dialogue Board with Dual Gender Voices 👨/👩 & Exercise Answer Keys' : 'กระดานเสียงบทสนทนา แยกเพศตัวละคร 👨/👩 & เฉลยแบบฝึกหัด';
             }
             const t2 = document.getElementById('tool-tab-2');
             if (t2) {
-                t2.querySelector('.tab-pillar-badge').innerText = t('pillar2Badge');
-                t2.querySelector('strong').innerText = t('pillar2Title');
-                t2.querySelector('.desc').innerText = t('pillar2Desc');
+                t2.querySelector('.tab-pillar-badge').innerText = isEn ? 'Group 2 • Student' : 'กลุ่มที่ 2 • นักเรียน';
+                t2.querySelector('strong').innerText = isEn ? '🗂️ Flashcards & AI Coach' : '🗂️ Flashcards & AI Coach';
+                t2.querySelector('.desc').innerText = isEn ? '3D Flashcards with translations & 3-sentence AI Pronunciation Coach' : 'บัตรคำศัพท์ 3D พลิกดูคำแปล & โค้ชฝึกออกเสียง 3 ประโยค';
             }
             const t3 = document.getElementById('tool-tab-3');
             if (t3) {
-                t3.querySelector('.tab-pillar-badge').innerText = t('pillar3Badge');
-                t3.querySelector('strong').innerText = t('pillar3Title');
-                t3.querySelector('.desc').innerText = t('pillar3Desc');
+                t3.querySelector('.tab-pillar-badge').innerText = isEn ? 'Group 3 • Assessment' : 'กลุ่มที่ 3 • มาตรฐานสอบ';
+                t3.querySelector('strong').innerText = isEn ? '📝 O-NET / CEFR Exam Hub' : '📝 O-NET / CEFR Exam Hub';
+                t3.querySelector('.desc').innerText = isEn ? '5 Questions per unit testing Grammar, Structure, Vocab, Dialogue & Reading' : 'คลังข้อสอบ 5 ข้อต่อบทเรียน ตรวจคำตอบทันที';
             }
             const t4 = document.getElementById('tool-tab-4');
             if (t4) {
-                t4.querySelector('.tab-pillar-badge').innerText = t('pillar4Badge');
-                t4.querySelector('strong').innerText = t('pillar4Title');
-                t4.querySelector('.desc').innerText = t('pillar4Desc');
+                t4.querySelector('.tab-pillar-badge').innerText = isEn ? 'Group 4 • Analytics' : 'กลุ่มที่ 4 • วิเคราะห์ผล';
+                t4.querySelector('strong').innerText = isEn ? '📊 Class Progress Dashboard' : '📊 Class Progress Dashboard';
+                t4.querySelector('.desc').innerText = isEn ? '4-Dimension Diagnostic Analysis & Strengths/Weaknesses Report' : 'วิเคราะห์ผลสัมฤทธิ์ 4 มิติทักษะ & รายงานจุดเด่นจุดพัฒนา';
             }
 
-            // Sync student bar texts
+            // Student Bar
             const barSub = document.getElementById('txt-bar-submit');
-            if (barSub) barSub.innerText = t('barSubmit');
+            if (barSub) barSub.innerText = isEn ? 'Submit Score to Host' : 'ส่งคะแนนขึ้นจอครู';
             const barLeave = document.getElementById('txt-bar-leave');
-            if (barLeave) barLeave.innerText = t('barLeave');
+            if (barLeave) barLeave.innerText = isEn ? 'Leave Room' : 'ออกจากห้อง';
+
+            // Footer
+            const footerP = document.querySelectorAll('footer p');
+            if (footerP[0]) {
+                footerP[0].innerHTML = isEn 
+                    ? '<strong>New World Smart Learning Hub</strong> | Thai Watana Panich (TWP) | Fundamental English Course Series (Grades 7 - 12)'
+                    : '<strong>New World Smart Learning Hub</strong> | สำนักพิมพ์ไทยวัฒนาพานิช (ทวพ.) | หนังสือเรียนภาษาอังกฤษพื้นฐานชุด New World ม.1 - ม.6';
+            }
+            if (footerP[1]) {
+                footerP[1].innerHTML = isEn
+                    ? 'Aligned with the Basic Education Core Curriculum B.E. 2551 (OBEC) Ministry of Education | <a href="http://www.twp.co.th" target="_blank" rel="noopener noreferrer">www.twp.co.th</a>'
+                    : 'ตามหลักสูตรแกนกลางการศึกษาขั้นพื้นฐาน พุทธศักราช 2551 (สพฐ.) กระทรวงศึกษาธิการ | <a href="http://www.twp.co.th" target="_blank" rel="noopener noreferrer">www.twp.co.th</a>';
+            }
+
+            // Modals: Classroom Host Modal
+            const hostTitle = document.getElementById('txt-host-title');
+            if (hostTitle) hostTitle.innerText = isEn ? '👨‍🏫 Live Classroom Host Center' : '👨‍🏫 ศูนย์ควบคุมห้องเรียนสด (Live Classroom)';
+            const hostPinLabel = document.getElementById('txt-host-pin-label');
+            if (hostPinLabel) hostPinLabel.innerText = isEn ? 'Room PIN Code' : 'รหัสห้องเรียน (Room PIN)';
+            const hostQrDesc = document.getElementById('txt-host-qr-desc');
+            if (hostQrDesc) hostQrDesc.innerText = isEn ? 'Ask students to scan this QR Code to join synchronously' : 'ให้นักเรียนสแกน QR Code เพื่อเข้าห้องเรียนนี้โดยอัตโนมัติ';
+            const hostBtnProj = document.getElementById('txt-host-btn-proj');
+            if (hostBtnProj) hostBtnProj.innerText = isEn ? 'Projector / TV Theater View' : 'ขยายขึ้นจอทีวี/โปรเจกเตอร์';
+            const hostBtnCopy = document.getElementById('txt-host-btn-copy');
+            if (hostBtnCopy) hostBtnCopy.innerText = isEn ? 'Copy Join Link' : 'คัดลอกลิงก์';
+            const hostScoreTitle = document.getElementById('txt-scoreboard-title');
+            if (hostScoreTitle) hostScoreTitle.innerText = isEn ? '📊 Live Session Scoreboard' : '📊 กระดานคะแนนสดเฉพาะครั้ง (Live Scoreboard)';
+            const hostRefresh = document.getElementById('txt-host-refresh');
+            if (hostRefresh) hostRefresh.innerText = isEn ? 'Refresh' : 'รีเฟรช';
+            const hostClear = document.getElementById('txt-host-clear');
+            if (hostClear) hostClear.innerText = isEn ? 'Clear Scores' : 'ล้างคะแนนรอบนี้';
+            const hostFooter = document.getElementById('txt-host-footer-note');
+            if (hostFooter) hostFooter.innerText = isEn ? '💡 This live scoreboard is session-based for in-class learning activities without permanent grading.' : '💡 ระบบคะแนนสดนี้สร้างขึ้นเฉพาะครั้ง (Session-based) เพื่อกิจกรรมในคาบเรียน ไม่มีการเก็บคะแนนถาวรผูกมัดผู้เรียน';
+
+            // Scoreboard Table Headers
+            const thName = document.getElementById('th-student-name');
+            if (thName) thName.innerText = isEn ? 'Student Name' : 'ชื่อนักเรียน (Student)';
+            const thProgress = document.getElementById('th-progress');
+            if (thProgress) thProgress.innerText = isEn ? 'Status' : 'สถานะ (Status)';
+            const thScore = document.getElementById('th-score');
+            if (thScore) thScore.innerText = isEn ? 'Exam Score' : 'คะแนนข้อสอบ (Exam Score)';
+            const thTime = document.getElementById('th-time');
+            if (thTime) thTime.innerText = isEn ? 'Time Spent' : 'เวลาที่ใช้ (Time)';
+            const thSync = document.getElementById('th-sync');
+            if (thSync) thSync.innerText = isEn ? 'Last Update' : 'อัปเดตล่าสุด';
+
+            // Projector Modal
+            const projTitle = document.getElementById('txt-proj-title');
+            if (projTitle) projTitle.innerText = 'New World Smart Learning Hub';
+            const projSubtitle = document.getElementById('proj-unit-subtitle');
+            if (projSubtitle) projSubtitle.innerText = isEn ? 'Live Classroom • Scan to Join Session' : 'ห้องเรียนกลุ่มสด • สแกนเพื่อเข้าทำกิจกรรมพร้อมกัน';
+            const projDirectUrl = document.getElementById('projector-direct-url');
+            if (projDirectUrl) {
+                const baseUri = window.location.href.split('?')[0].split('#')[0];
+                projDirectUrl.innerText = isEn ? 'Or visit website: ' + baseUri : 'หรือเข้าเว็บไซต์: ' + baseUri;
+            }
+
+            // Student Join Modal
+            const joinTitle = document.getElementById('txt-join-title');
+            if (joinTitle) joinTitle.innerText = isEn ? 'Join Live Classroom' : 'เข้าร่วมห้องเรียนกลุ่มสด';
+            const joinSub = document.getElementById('txt-join-sub');
+            if (joinSub) joinSub.innerText = isEn ? 'You are joining Room PIN:' : 'คุณกำลังเข้าร่วมห้องเรียนรหัส:';
+            const joinNameLabel = document.getElementById('txt-join-name-label');
+            if (joinNameLabel) joinNameLabel.innerText = isEn ? 'Enter your name, nickname, or Student ID:' : 'พิมพ์ชื่อเล่น หรือชื่อ-เลขที่ของคุณ:';
+            const inputStudentName = document.getElementById('input-student-name');
+            if (inputStudentName) inputStudentName.placeholder = isEn ? 'e.g. Tom Harrison (No. 12)' : 'เช่น น้องนัท (ม.1/2 เลขที่ 5)';
+            const joinConfirmBtn = document.getElementById('txt-join-confirm-btn');
+            if (joinConfirmBtn) joinConfirmBtn.innerText = isEn ? 'Join Classroom Now' : 'เข้าร่วมห้องเรียนทันที';
+
+            // Academic Modal
+            const acadHeader = document.querySelector('#academic-modal h2');
+            if (acadHeader) acadHeader.innerText = isEn ? 'Academic Framework & Curriculum Standards' : 'กรอบมาตรฐานวิชาการและระเบียบวิธีวิเคราะห์ (Academic Framework)';
+
+            // Landing Page elements
+            const landingLangBtn = document.getElementById('landing-btn-lang');
+            if (landingLangBtn) landingLangBtn.innerHTML = isEn ? '🇹🇭 TH' : '🇬🇧 EN';
+
+            const landingSub = document.querySelector('.landing-subtitle');
+            if (landingSub) {
+                landingSub.innerHTML = isEn
+                    ? 'Thai Watana Panich (TWP) | Digital English Learning Innovation Center<br>New World Student Books 1 - 6 (72 Units) Core Curriculum B.E. 2551 (OBEC)'
+                    : 'สำนักพิมพ์ไทยวัฒนาพานิช (ทวพ.) | ศูนย์สื่อนวัตกรรมการเรียนรู้ดิจิทัลภาษาอังกฤษ<br>หนังสือเรียนชุด New World ม.1 - ม.6 (72 บทเรียน) ตามหลักสูตรแกนกลางฯ 2551 (สพฐ.)';
+            }
+            const landingHint = document.querySelector('.landing-click-hint');
+            if (landingHint) {
+                landingHint.innerText = isEn
+                    ? '👆 Tap or click logo or button below to enter'
+                    : '👆 แตะหรือคลิกที่โลโก้ หรือปุ่มด้านล่างเพื่อเข้าสู่ระบบ';
+            }
+            const enterAppBtn = document.querySelector('.btn-enter-app span');
+            if (enterAppBtn) {
+                enterAppBtn.innerText = isEn
+                    ? '🚀 Enter New World Digital Classroom'
+                    : '🚀 เข้าสู่ห้องเรียนดิจิทัล New World';
+            }
         }
 
-        // ==============================================================
-        // --- Live Classroom Group Host & Student Subsystem ---
-        // ==============================================================
+        
         let currentRoomPin = null;
         let activeStudentRoom = null;
         let currentStudentName = null;
