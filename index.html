@@ -2155,8 +2155,8 @@
                 <span>🏠</span>
             </button>
 <div class="brand-text">
-                <h1>New World Smart Learning Hub <span class="version-badge" style="font-size:0.7rem; vertical-align:middle;">v1.4.0</span></h1>
-                <span>สำนักพิมพ์ไทยวัฒนาพานิช (ทวพ.) | หลักสูตรแกนกลางฯ 2551 (สพฐ.)</span>
+                <h1>New World Smart Learning Hub <span class="version-badge" id="header-version-badge" style="font-size:0.7rem; vertical-align:middle;">v1.4.0</span></h1>
+                <span id="header-brand-subtitle">สำนักพิมพ์ไทยวัฒนาพานิช (ทวพ.) | หลักสูตรแกนกลางฯ 2551 (สพฐ.)</span>
             </div>
         </div>
         <div class="header-controls">
@@ -13918,12 +13918,16 @@ let currentBook = 1;
             const classroomTxt = document.getElementById('txt-classroom-btn');
             if (classroomTxt) classroomTxt.innerText = isEn ? 'Live Classroom' : 'ห้องเรียนสด (Live Room)';
 
-            // Header brand subtitle
-            const brandSub = document.querySelector('.brand-text span');
+            // Header brand subtitle & version badge
+            const brandSub = document.getElementById('header-brand-subtitle');
             if (brandSub) {
                 brandSub.innerText = isEn 
                     ? 'Thai Watana Panich (TWP) | Basic Education Core Curriculum B.E. 2551 (OBEC)'
                     : 'สำนักพิมพ์ไทยวัฒนาพานิช (ทวพ.) | หลักสูตรแกนกลางฯ 2551 (สพฐ.)';
+            }
+            const vBadge = document.getElementById('header-version-badge');
+            if (vBadge) {
+                vBadge.innerText = 'v1.4.0';
             }
 
             // Voice labels in header
