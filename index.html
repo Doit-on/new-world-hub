@@ -1871,10 +1871,235 @@
                 grid-template-columns: 1fr !important;
             }
         }
-</style>
+
+        /* --- Bilingual Switcher & Classroom Host Styles (v1.4.0) --- */
+        .btn-lang-toggle {
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            color: var(--primary);
+            border: 1px solid #cbd5e1;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            transition: all 0.2s ease;
+        }
+        .btn-lang-toggle:hover {
+            background: #ffffff;
+            border-color: var(--accent);
+            transform: translateY(-1px);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        .btn-live-classroom {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            color: #ffffff;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 5px rgba(220, 38, 38, 0.3);
+            transition: all 0.2s ease;
+            animation: pulse-live 2.5s infinite;
+        }
+        .btn-live-classroom:hover {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(220, 38, 38, 0.4);
+        }
+        @keyframes pulse-live {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
+            50% { box-shadow: 0 0 0 6px rgba(220, 38, 38, 0); }
+        }
+
+        /* Student Classroom Notification Bar */
+        .student-classroom-bar {
+            background: linear-gradient(90deg, #1e293b, #0f172a);
+            color: #ffffff;
+            padding: 10px 18px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-left: 5px solid #10b981;
+        }
+        .student-bar-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.92rem;
+            font-weight: 600;
+        }
+        .student-bar-badge {
+            background: #10b981;
+            color: #ffffff;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        /* Projector Theater Fullscreen Modal */
+        .projector-theater-modal {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: #090d16;
+            color: #ffffff;
+            z-index: 99999;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            text-align: center;
+            overflow-y: auto;
+        }
+        .projector-theater-modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+        .projector-content {
+            max-width: 900px;
+            width: 100%;
+            background: #111827;
+            border: 2px solid #374151;
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            position: relative;
+        }
+        .projector-qr-container {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 20px 0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+        .projector-qr-img {
+            width: clamp(240px, 35vw, 420px);
+            height: clamp(240px, 35vw, 420px);
+            display: block;
+            object-fit: contain;
+        }
+        .projector-pin-banner {
+            font-size: clamp(2.2rem, 5vw, 4rem);
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: #38bdf8;
+            margin: 10px 0;
+            text-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
+            font-family: monospace;
+        }
+        .btn-close-projector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.1);
+            color: #ffffff;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 8px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 700;
+            transition: all 0.2s;
+        }
+        .btn-close-projector:hover {
+            background: #ef4444;
+            border-color: #ef4444;
+        }
+
+        /* Classroom Host Dashboard Modal */
+        .classroom-host-modal {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 99990;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .classroom-host-modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+        .classroom-host-card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 950px;
+            max-height: 90vh;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .classroom-host-header {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            color: #ffffff;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .classroom-host-body {
+            padding: 24px;
+            overflow-y: auto;
+            flex: 1;
+        }
+        .scoreboard-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 0.92rem;
+        }
+        .scoreboard-table th {
+            background: #f8fafc;
+            color: #475569;
+            text-align: left;
+            padding: 12px 14px;
+            border-bottom: 2px solid #e2e8f0;
+            font-weight: 700;
+        }
+        .scoreboard-table td {
+            padding: 12px 14px;
+            border-bottom: 1px solid #f1f5f9;
+            color: #1e293b;
+        }
+        .scoreboard-table tr:hover {
+            background: #f8fafc;
+        }
+        .student-score-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+        .badge-perfect { background: #dcfce7; color: #15803d; }
+        .badge-good { background: #e0f2fe; color: #0369a1; }
+        .badge-pending { background: #fef3c7; color: #b45309; }
+
+    </style>
 </head>
 <body>
-    <!-- Landing Page View (v1.3.0) -->
+    <!-- Landing Page View (v1.4.0) -->
     <div id="landing-page-overlay" class="landing-overlay">
         <div class="landing-bg-mosaic">
             <img src="New1.jpg" alt="Cover 1" onerror="this.onerror=null; this.src='3.png'">
@@ -1890,7 +2115,7 @@
             </div>
 
             <div style="margin-bottom:8px;">
-                <span class="version-badge">VERSION 1.3.0</span>
+                <span class="version-badge">VERSION 1.4.0</span>
             </div>
 
             <h1 class="landing-title">New World Smart Learning Hub</h1>
@@ -1925,13 +2150,19 @@
                 <span>🏠</span>
             </button>
 <div class="brand-text">
-                <h1>New World Smart Learning Hub <span class="version-badge" style="font-size:0.7rem; vertical-align:middle;">v1.3.0</span></h1>
+                <h1>New World Smart Learning Hub <span class="version-badge" style="font-size:0.7rem; vertical-align:middle;">v1.4.0</span></h1>
                 <span>สำนักพิมพ์ไทยวัฒนาพานิช (ทวพ.) | หลักสูตรแกนกลางฯ 2551 (สพฐ.)</span>
             </div>
         </div>
         <div class="header-controls">
-            <button class="btn-academic-modal" onclick="openAcademicModal()" title="ดูมาตรฐานหลักสูตร กรอบ CEFR และวิธีวิเคราะห์">
-                📘 มาตรฐานวิชาการ (Standards)
+            <button class="btn-academic-modal" id="header-btn-academic" onclick="openAcademicModal()" title="ดูมาตรฐานหลักสูตร กรอบ CEFR และวิธีวิเคราะห์">
+                📘 <span id="txt-academic-btn">มาตรฐานหลักสูตร & CEFR</span>
+            </button>
+            <button class="btn-live-classroom" id="header-btn-classroom" onclick="openClassroomHostModal()" title="เปิดห้องเรียนกลุ่มสด (Live Classroom Host)">
+                👥 <span id="txt-classroom-btn">ห้องเรียนสด (Live Room)</span>
+            </button>
+            <button class="btn-lang-toggle" id="header-btn-lang" onclick="toggleLanguage()" title="Switch Language / สลับภาษา">
+                🇬🇧 EN
             </button>
 
             <!-- Dual Voice System: Male Voice Capsule -->
@@ -1968,7 +2199,7 @@
     </header>
 
     
-    <!-- App Main Shell with Collapsible Sidebar (v1.3.0) -->
+    <!-- App Main Shell with Collapsible Sidebar (v1.4.0) -->
     <div class="app-shell">
         <!-- Collapsible Navigation Sidebar (For Mobile & Desktop) -->
         <aside class="app-sidebar" id="app-sidebar">
@@ -2069,6 +2300,22 @@
 
         <!-- Main Workspace Area -->
         <main class="app-main-workspace">
+            <!-- Student Live Classroom Notification Bar (v1.4.0) -->
+            <div id="student-classroom-bar" class="student-classroom-bar" style="display:none;">
+                <div class="student-bar-info">
+                    <span class="student-bar-badge">LIVE CLASSROOM</span>
+                    <span id="student-bar-pin" style="font-weight:800; color:#38bdf8;">PIN: -</span>
+                    <span id="student-bar-name" style="color:#e2e8f0;">| นักเรียน: -</span>
+                </div>
+                <div style="display:flex; gap:8px; align-items:center;">
+                    <button class="btn-outline" onclick="submitCurrentScoreToHost()" style="color:#10b981; border-color:#10b981; padding:5px 14px; font-size:0.84rem; background:rgba(16,185,129,0.15); font-weight:700;">
+                        📤 <span id="txt-bar-submit">ส่งคะแนนขึ้นจอครู</span>
+                    </button>
+                    <button class="btn-outline" onclick="leaveClassroomRoom()" style="color:#f87171; border-color:#ef4444; padding:5px 12px; font-size:0.84rem; background:rgba(239,68,68,0.15); font-weight:700;">
+                        🚪 <span id="txt-bar-leave">ออกจากห้อง</span>
+                    </button>
+                </div>
+            </div>
 
             <!-- Step 1: 6 Book Levels Covers Strip (New World 1 - 6) -->
             <div class="section-header" style="margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
@@ -11683,7 +11930,7 @@ let currentBook = 1;
         }
 
         
-        // --- Character Name-Based Gender Voice Engine (v1.3.0) ---
+        // --- Character Name-Based Gender Voice Engine (v1.4.0) ---
         const MALE_NAMES = new Set([
             'david', 'ken', 'tom', 'bob', 'alex', 'mark', 'jack', 'michael', 'john', 
             'andy', 'carlos', 'paulo', 'mario', 'tony', 'brian', 'peter', 'sam', 
@@ -12058,7 +12305,7 @@ let currentBook = 1;
 
             const ind = document.getElementById('active-book-indicator');
             if (ind && newWorldDB && newWorldDB[currentBook]) {
-                ind.innerText = 'กำลังแสดง: ' + newWorldDB[currentBook].title;
+                ind.innerText = (currentLang === 'en' ? 'Now Viewing: ' : 'กำลังแสดง: ') + newWorldDB[currentBook].title;
             }
 
             closeMobileSidebar();
@@ -12657,7 +12904,9 @@ let currentBook = 1;
             const container = document.getElementById('workspace-container') || document.getElementById('dynamic-tool-container');
             const metaEl = document.getElementById('curriculum-meta-info');
             if (metaEl) {
-                metaEl.innerHTML = '<span><strong>ไวยากรณ์:</strong> ' + unit.grammar + '</span> • <span><strong>บทอ่าน:</strong> "' + unit.reading + '"</span> • <span><strong>กรอบมาตรฐาน:</strong> CEFR ' + bookData.cefr + '</span>';
+                metaEl.innerHTML = (currentLang === 'en')
+                    ? '<span><strong>Grammar:</strong> ' + unit.grammar + '</span> • <span><strong>Reading:</strong> "' + unit.reading + '"</span> • <span><strong>Framework:</strong> CEFR ' + bookData.cefr + '</span>'
+                    : '<span><strong>ไวยากรณ์:</strong> ' + unit.grammar + '</span> • <span><strong>บทอ่าน:</strong> "' + unit.reading + '"</span> • <span><strong>กรอบมาตรฐาน:</strong> CEFR ' + bookData.cefr + '</span>';
             }
             const targetSentence = (unit.dialogue && unit.dialogue.length > 0) 
                 ? unit.dialogue[0].replace(/^[A-Za-z0-9_\s.]+:\s*/, '').trim() 
@@ -13329,6 +13578,19 @@ let currentBook = 1;
             const currentAnswers = userExamAnswers[unitKey];
             if (currentAnswers && currentAnswers.filter(a => a !== null).length === 5) {
                 const correctCount = currentAnswers.filter(a => a && a.isCorrect).length;
+                
+                // If in a live classroom, broadcast score to teacher host immediately
+                if (typeof activeStudentRoom !== 'undefined' && activeStudentRoom && typeof currentStudentName !== 'undefined' && currentStudentName) {
+                    broadcastStudentUpdate({
+                        room: activeStudentRoom,
+                        name: currentStudentName,
+                        status: 'completed',
+                        score: correctCount,
+                        total: 5,
+                        timeSec: Math.round((Date.now() - telemetrySectionStartTime) / 1000),
+                        updatedAt: Date.now()
+                    });
+                }
                 sendTelemetry({
                     sessionId: telemetrySessionId,
                     device: getDeviceType(),
@@ -13442,7 +13704,7 @@ let currentBook = 1;
 
         
         // --- Version 1.3.0 Navigation & Mobile Drawer Controller ---
-        const APP_VERSION = 'v1.3.0';
+        const APP_VERSION = 'v1.4.0';
 
         function enterAppFromLanding() {
             playChime('click');
@@ -13489,6 +13751,585 @@ let currentBook = 1;
             if (backdrop) backdrop.classList.remove('active');
         }
 
+        
+        // ==============================================================
+        // --- Bilingual i18n & Live Classroom Subsystems (v1.4.0) ---
+        // ==============================================================
+        
+        let currentLang = (function() {
+            try { return localStorage.getItem('nw_lang') || 'th'; } catch(e) { return 'th'; }
+        })();
+
+        const i18n = {
+            th: {
+                appTitle: "New World Smart Learning Hub",
+                academicBtn: "มาตรฐานหลักสูตร & CEFR",
+                classroomBtn: "ห้องเรียนสด (Live Room)",
+                teacherRole: "ครู",
+                studentRole: "นักเรียน",
+                nowViewing: "กำลังแสดง:",
+                unitLabel: "บทเรียน (Unit):",
+                prevUnit: "◀ บทก่อนหน้า",
+                nextUnit: "บทถัดไป ▶",
+                pillar1Badge: "กลุ่มที่ 1 • ครูผู้สอน",
+                pillar1Title: "💬 Audio & Answer Board",
+                pillar1Desc: "กระดานเสียงบทสนทนา แยกเพศตัวละคร 👨/👩 & เฉลยแบบฝึกหัด",
+                pillar2Badge: "กลุ่มที่ 2 • นักเรียน",
+                pillar2Title: "🗂️ Flashcards & AI Coach",
+                pillar2Desc: "บัตรคำศัพท์ 3D พลิกดูคำแปล & โค้ชฝึกออกเสียง 3 ประโยค",
+                pillar3Badge: "กลุ่มที่ 3 • มาตรฐานสอบ",
+                pillar3Title: "📝 O-NET / CEFR Exam Hub",
+                pillar3Desc: "คลังข้อสอบ 5 ข้อต่อบทเรียน ตรวจคำตอบทันที",
+                pillar4Badge: "กลุ่มที่ 4 • วิเคราะห์ผล",
+                pillar4Title: "📊 Class Progress Dashboard",
+                pillar4Desc: "วิเคราะห์ผลสัมฤทธิ์ 4 มิติทักษะ & รายงานจุดเด่นจุดพัฒนา",
+                speechSpeedLabel: "ความเร็วเสียง:",
+                voiceFemaleLabel: "👩 เสียงหญิง:",
+                voiceMaleLabel: "👨 เสียงชาย:",
+                voiceTestBtn: "ลอง",
+                playAllDialogue: "▶ เล่นบทสนทนาทั้งหมด (Dual Voice)",
+                pauseAudio: "⏹ หยุดเล่นเสียง",
+                revealAnswerKey: "เฉลยแบบฝึกหัดประจำบท (คลิกเพื่อดู)",
+                flipCardPrompt: "💡 คลิกที่การ์ดเพื่อพลิกดูคำแปลภาษาไทย (3D Flip)",
+                vocabCatalogTitle: "รายการคำศัพท์ประจำบท:",
+                aiCoachHeading: "🎙️ AI Pronunciation Coach (ฝึกออกเสียงผ่านไมค์)",
+                aiCoachBtn1: "1. ฟังเสียงต้นแบบ (Listen)",
+                aiCoachBtn2: "2. เริ่มพูดใส่ไมโครโฟน (บันทึกเสียง)",
+                aiCoachBtn3: "3. ฟังเสียงตนเอง (My Voice)",
+                aiCoachReset: "🗑️ ล้างเสียง (Free RAM)",
+                examBadge: "O-NET & CEFR Readiness Test",
+                examPillPrompt: "เลือกข้อสอบ:",
+                examCategoryPrompt: "🎯 หมวดการวัดผล:",
+                examQPrompt: "คำถามข้อที่",
+                examPrev: "⬅️ ข้อก่อนหน้า",
+                examNext: "ข้อถัดไป ➡️",
+                examRetry: "🔄 ทำข้อนี้ใหม่",
+                examDoneMsg: "🏆 ทำแบบทดสอบครบ 5 ข้อแล้ว!",
+                examScorePrefix: "ได้คะแนน:",
+                examGoDashBtn: "📊 ไปดูการวิเคราะห์จุดเด่น-จุดอ่อน (Dashboard) ➔",
+                barSubmit: "ส่งคะแนนขึ้นจอครู",
+                barLeave: "ออกจากห้อง",
+                hostTitle: "👨‍🏫 ศูนย์ควบคุมห้องเรียนสด (Live Classroom)",
+                hostPin: "รหัสห้องเรียน (Room PIN):",
+                hostDesc: "ให้นักเรียนสแกน QR Code เพื่อเข้าห้องเรียนนี้โดยอัตโนมัติ",
+                hostProjector: "ขยายขึ้นจอทีวี/โปรเจกเตอร์",
+                hostCopy: "คัดลอกลิงก์",
+                hostScoreboard: "📊 กระดานคะแนนสดเฉพาะครั้ง (Live Scoreboard)",
+                hostRefresh: "รีเฟรช",
+                hostClear: "ล้างคะแนนรอบนี้",
+                hostFooter: "💡 ระบบคะแนนสดนี้สร้างขึ้นเฉพาะครั้ง (Session-based) เพื่อกิจกรรมในคาบเรียน ไม่มีการเก็บคะแนนถาวรผูกมัดผู้เรียน"
+            },
+            en: {
+                appTitle: "New World Smart Learning Hub",
+                academicBtn: "Standards & CEFR",
+                classroomBtn: "Live Classroom",
+                teacherRole: "Teacher",
+                studentRole: "Student",
+                nowViewing: "Now Viewing:",
+                unitLabel: "Unit:",
+                prevUnit: "◀ Previous",
+                nextUnit: "Next ▶",
+                pillar1Badge: "Group 1 • Teacher",
+                pillar1Title: "💬 Audio & Answer Board",
+                pillar1Desc: "Dialogue Audio Board with Gender Voice (Male/Female) & Answers",
+                pillar2Badge: "Group 2 • Student",
+                pillar2Title: "🗂️ Flashcards & AI Coach",
+                pillar2Desc: "3D Flashcards with definitions & 3-sentence AI Pronunciation Coach",
+                pillar3Badge: "Group 3 • Assessment",
+                pillar3Title: "📝 O-NET / CEFR Exam Hub",
+                pillar3Desc: "5 Unit-Specific Readiness Questions with Instant Scoring",
+                pillar4Badge: "Group 4 • Analytics",
+                pillar4Title: "📊 Class Progress Dashboard",
+                pillar4Desc: "4-Dimension Diagnostic Analysis & Strengths/Weaknesses",
+                speechSpeedLabel: "Audio Speed:",
+                voiceFemaleLabel: "👩 Female Voice:",
+                voiceMaleLabel: "👨 Male Voice:",
+                voiceTestBtn: "Test",
+                playAllDialogue: "▶ Play Full Dialogue (Dual Voice)",
+                pauseAudio: "⏹ Stop Playback",
+                revealAnswerKey: "Unit Exercise Answer Key (Click to reveal)",
+                flipCardPrompt: "💡 Click card to flip and reveal definition (3D Flip)",
+                vocabCatalogTitle: "Unit Vocabulary Items:",
+                aiCoachHeading: "🎙️ AI Pronunciation Coach (Microphone Practice)",
+                aiCoachBtn1: "1. Listen to Native Speaker",
+                aiCoachBtn2: "2. Speak into Microphone (Record)",
+                aiCoachBtn3: "3. Listen to My Voice",
+                aiCoachReset: "🗑️ Reset Audio (Free RAM)",
+                examBadge: "O-NET & CEFR Readiness Test",
+                examPillPrompt: "Select Question:",
+                examCategoryPrompt: "🎯 Measurement Category:",
+                examQPrompt: "Question",
+                examPrev: "⬅️ Previous",
+                examNext: "Next ➡️",
+                examRetry: "🔄 Retry Question",
+                examDoneMsg: "🏆 All 5 Questions Completed!",
+                examScorePrefix: "Score Achieved:",
+                examGoDashBtn: "📊 View Diagnostic Strengths & Weaknesses ➔",
+                barSubmit: "Submit Score to Host",
+                barLeave: "Leave Room",
+                hostTitle: "👨‍🏫 Live Classroom Host Center",
+                hostPin: "Room PIN:",
+                hostDesc: "Ask students to scan this QR Code with mobile or tablet to join.",
+                hostProjector: "Fullscreen Projector / TV Mode",
+                hostCopy: "Copy Join Link",
+                hostScoreboard: "📊 Live Session Scoreboard",
+                hostRefresh: "Refresh",
+                hostClear: "Clear Scores (New Round)",
+                hostFooter: "💡 This live scoreboard is session-based for in-class learning activities without permanent grading."
+            }
+        };
+
+        function t(key) {
+            if (i18n[currentLang] && i18n[currentLang][key]) {
+                return i18n[currentLang][key];
+            }
+            return i18n['th'][key] || key;
+        }
+
+        function toggleLanguage() {
+            playChime('click');
+            currentLang = (currentLang === 'th') ? 'en' : 'th';
+            try { localStorage.setItem('nw_lang', currentLang); } catch(e){}
+            applyLanguageToUI();
+            renderWorkspace();
+        }
+
+        function applyLanguageToUI() {
+            const langBtn = document.getElementById('header-btn-lang');
+            if (langBtn) {
+                langBtn.innerHTML = (currentLang === 'th') ? '🇬🇧 EN' : '🇹🇭 TH';
+            }
+            const academicTxt = document.getElementById('txt-academic-btn');
+            if (academicTxt) academicTxt.innerText = t('academicBtn');
+
+            const classroomTxt = document.getElementById('txt-classroom-btn');
+            if (classroomTxt) classroomTxt.innerText = t('classroomBtn');
+
+            // Sync Tool Tabs
+            const t1 = document.getElementById('tool-tab-1');
+            if (t1) {
+                t1.querySelector('.tab-pillar-badge').innerText = t('pillar1Badge');
+                t1.querySelector('strong').innerText = t('pillar1Title');
+                t1.querySelector('.desc').innerText = t('pillar1Desc');
+            }
+            const t2 = document.getElementById('tool-tab-2');
+            if (t2) {
+                t2.querySelector('.tab-pillar-badge').innerText = t('pillar2Badge');
+                t2.querySelector('strong').innerText = t('pillar2Title');
+                t2.querySelector('.desc').innerText = t('pillar2Desc');
+            }
+            const t3 = document.getElementById('tool-tab-3');
+            if (t3) {
+                t3.querySelector('.tab-pillar-badge').innerText = t('pillar3Badge');
+                t3.querySelector('strong').innerText = t('pillar3Title');
+                t3.querySelector('.desc').innerText = t('pillar3Desc');
+            }
+            const t4 = document.getElementById('tool-tab-4');
+            if (t4) {
+                t4.querySelector('.tab-pillar-badge').innerText = t('pillar4Badge');
+                t4.querySelector('strong').innerText = t('pillar4Title');
+                t4.querySelector('.desc').innerText = t('pillar4Desc');
+            }
+
+            // Sync student bar texts
+            const barSub = document.getElementById('txt-bar-submit');
+            if (barSub) barSub.innerText = t('barSubmit');
+            const barLeave = document.getElementById('txt-bar-leave');
+            if (barLeave) barLeave.innerText = t('barLeave');
+        }
+
+        // ==============================================================
+        // --- Live Classroom Group Host & Student Subsystem ---
+        // ==============================================================
+        let currentRoomPin = null;
+        let activeStudentRoom = null;
+        let currentStudentName = null;
+        let classroomStudents = [];
+        let classroomChannel = null;
+
+        function getRoomStorageKey(pin) {
+            return 'nw_room_records_' + pin;
+        }
+
+        function openClassroomHostModal() {
+            playChime('click');
+            if (!currentRoomPin) {
+                // Generate a friendly 4-digit PIN: NW-XXXX
+                currentRoomPin = 'NW-' + Math.floor(1000 + Math.random() * 9000);
+            }
+
+            const pinDisplay = document.getElementById('host-pin-display');
+            if (pinDisplay) pinDisplay.innerText = currentRoomPin;
+
+            const subText = document.getElementById('host-room-subtext');
+            const bookTitle = (newWorldDB && newWorldDB[currentBook]) ? newWorldDB[currentBook].title : 'New World';
+            const unit = (newWorldDB && newWorldDB[currentBook] && newWorldDB[currentBook].units[currentUnitIndex]) 
+                ? newWorldDB[currentBook].units[currentUnitIndex] : { u: 1, title: '' };
+            if (subText) subText.innerText = `${bookTitle} • Unit ${unit.u}: ${unit.title}`;
+
+            // Generate Join URL
+            const baseUri = window.location.href.split('?')[0].split('#')[0];
+            const joinUrl = `${baseUri}?room=${currentRoomPin}&b=${currentBook}&u=${currentUnitIndex}`;
+            
+            const urlLabel = document.getElementById('host-join-url-label');
+            if (urlLabel) urlLabel.innerText = joinUrl;
+
+            // Generate High-Res QR code
+            const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=450x450&margin=10&data=${encodeURIComponent(joinUrl)}`;
+            const previewImg = document.getElementById('host-qr-preview-img');
+            if (previewImg) previewImg.src = qrApiUrl;
+
+            const projImg = document.getElementById('projector-qr-large-img');
+            if (projImg) projImg.src = qrApiUrl;
+
+            // Initialize Channel & Pollers
+            initClassroomSync();
+            refreshClassroomScoreboard();
+
+            const modal = document.getElementById('classroom-host-modal');
+            if (modal) modal.classList.add('active');
+        }
+
+        function closeClassroomHostModal() {
+            playChime('click');
+            const modal = document.getElementById('classroom-host-modal');
+            if (modal) modal.classList.remove('active');
+        }
+
+        function closeClassroomHostModalOnBackdrop(event) {
+            if (event.target && event.target.id === 'classroom-host-modal') {
+                closeClassroomHostModal();
+            }
+        }
+
+        function openProjectorMode() {
+            playChime('click');
+            const pinText = document.getElementById('projector-pin-text');
+            if (pinText) pinText.innerText = 'PIN: ' + currentRoomPin;
+
+            const baseUri = window.location.href.split('?')[0].split('#')[0];
+            const directUrl = document.getElementById('projector-direct-url');
+            if (directUrl) directUrl.innerText = 'หรือเข้าเว็บไซต์: ' + baseUri;
+
+            const bookTitle = (newWorldDB && newWorldDB[currentBook]) ? newWorldDB[currentBook].title : 'New World';
+            const unit = (newWorldDB && newWorldDB[currentBook] && newWorldDB[currentBook].units[currentUnitIndex]) 
+                ? newWorldDB[currentBook].units[currentUnitIndex] : { u: 1, title: '' };
+            const sub = document.getElementById('proj-unit-subtitle');
+            if (sub) sub.innerText = `ห้องเรียนกลุ่มสด: ${bookTitle} • Unit ${unit.u}: ${unit.title}`;
+
+            const modal = document.getElementById('classroom-projector-modal');
+            if (modal) modal.classList.add('active');
+
+            // Try requesting fullscreen for true projector theater experience
+            try {
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen().catch(()=>{});
+                }
+            } catch(e){}
+        }
+
+        function closeProjectorMode() {
+            playChime('click');
+            const modal = document.getElementById('classroom-projector-modal');
+            if (modal) modal.classList.remove('active');
+            try {
+                if (document.exitFullscreen && document.fullscreenElement) {
+                    document.exitFullscreen().catch(()=>{});
+                }
+            } catch(e){}
+        }
+
+        function copyJoinLink() {
+            playChime('click');
+            const baseUri = window.location.href.split('?')[0].split('#')[0];
+            const joinUrl = `${baseUri}?room=${currentRoomPin}&b=${currentBook}&u=${currentUnitIndex}`;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(joinUrl).then(() => {
+                    alert('📋 คัดลอกลิงก์ห้องเรียนสดเรียบร้อยแล้ว:\\n' + joinUrl);
+                }).catch(() => {
+                    prompt('คัดลอกลิงก์ห้องเรียนสด:', joinUrl);
+                });
+            } else {
+                prompt('คัดลอกลิงก์ห้องเรียนสด:', joinUrl);
+            }
+        }
+
+        function initClassroomSync() {
+            if (!currentRoomPin) return;
+            if (typeof BroadcastChannel !== 'undefined' && !classroomChannel) {
+                try {
+                    classroomChannel = new BroadcastChannel('nw_classroom_channel_' + currentRoomPin);
+                    classroomChannel.onmessage = (event) => {
+                        if (event.data && event.data.room === currentRoomPin) {
+                            handleIncomingStudentData(event.data);
+                        }
+                    };
+                } catch(e){}
+            }
+
+            // Cross-window storage listener
+            window.addEventListener('storage', (e) => {
+                if (e.key === getRoomStorageKey(currentRoomPin)) {
+                    refreshClassroomScoreboard();
+                }
+            });
+        }
+
+        function handleIncomingStudentData(data) {
+            const key = getRoomStorageKey(currentRoomPin);
+            let records = [];
+            try {
+                records = JSON.parse(localStorage.getItem(key)) || [];
+            } catch(e) { records = []; }
+
+            const existingIdx = records.findIndex(r => r.name === data.name);
+            if (existingIdx >= 0) {
+                records[existingIdx] = Object.assign(records[existingIdx], data);
+            } else {
+                records.push(data);
+            }
+
+            try {
+                localStorage.setItem(key, JSON.stringify(records));
+            } catch(e){}
+
+            refreshClassroomScoreboard();
+        }
+
+        function refreshClassroomScoreboard() {
+            if (!currentRoomPin) return;
+            const key = getRoomStorageKey(currentRoomPin);
+            let records = [];
+            try {
+                records = JSON.parse(localStorage.getItem(key)) || [];
+            } catch(e) { records = []; }
+
+            classroomStudents = records;
+
+            // Update count badges
+            const countBadge = document.getElementById('host-student-count-badge');
+            if (countBadge) countBadge.innerText = `มีนักเรียนในห้อง: ${records.length} คน`;
+
+            const projCounter = document.getElementById('proj-student-counter');
+            if (projCounter) projCounter.innerText = `นักเรียนที่เข้าร่วมแล้ว: ${records.length} คน`;
+
+            const tbody = document.getElementById('host-scoreboard-tbody');
+            if (!tbody) return;
+
+            if (records.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6" style="text-align:center; padding:30px; color:#94a3b8;">
+                            ⏳ กำลังรอนักเรียนสแกน QR Code หรือกรอก PIN เข้าร่วมห้อง...
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            // Sort: completed first by score desc, then joined
+            records.sort((a, b) => {
+                if (a.status === 'completed' && b.status !== 'completed') return -1;
+                if (a.status !== 'completed' && b.status === 'completed') return 1;
+                return (b.score || 0) - (a.score || 0);
+            });
+
+            tbody.innerHTML = records.map((s, idx) => {
+                let badgeClass = 'badge-pending';
+                let statusText = 'เข้าร่วมห้องแล้ว (กำลังทำ)';
+                if (s.status === 'completed') {
+                    if (s.score === s.total) {
+                        badgeClass = 'badge-perfect';
+                        statusText = '✅ เสร็จสิ้นสมบูรณ์';
+                    } else {
+                        badgeClass = 'badge-good';
+                        statusText = '✓ ทำข้อสอบเสร็จแล้ว';
+                    }
+                }
+                const timeText = s.timeSec ? `${s.timeSec} วินาที` : '-';
+                const scoreText = (s.status === 'completed') ? `<strong>${s.score} / ${s.total} ข้อ</strong> (${Math.round((s.score/s.total)*100)}%)` : 'ยังไม่ส่ง';
+                const updatedTime = s.updatedAt ? new Date(s.updatedAt).toLocaleTimeString('th-TH') : '-';
+
+                return `
+                    <tr>
+                        <td style="font-weight:700; color:#64748b;">${idx + 1}</td>
+                        <td style="font-weight:700; color:#1e293b;">${s.name}</td>
+                        <td><span class="student-score-badge ${badgeClass}">${statusText}</span></td>
+                        <td style="color:#0284c7;">${scoreText}</td>
+                        <td style="color:#64748b;">${timeText}</td>
+                        <td style="font-size:0.8rem; color:#94a3b8;">${updatedTime}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function clearClassroomScores() {
+            if (!currentRoomPin) return;
+            if (confirm('คุณแน่ใจหรือไม่ว่าต้องการล้างคะแนนรอบนี้เพื่อเริ่มกิจกรรมรอบใหม่?')) {
+                playChime('click');
+                try {
+                    localStorage.removeItem(getRoomStorageKey(currentRoomPin));
+                } catch(e){}
+                classroomStudents = [];
+                refreshClassroomScoreboard();
+            }
+        }
+
+        // --- Student Side URL Parameter Parser & Handler ---
+        function checkUrlClassroomParameters() {
+            const params = new URLSearchParams(window.location.search);
+            const roomParam = params.get('room');
+            const bookParam = params.get('b') || params.get('book');
+            const unitParam = params.get('u') || params.get('unit');
+
+            if (roomParam) {
+                activeStudentRoom = roomParam.trim();
+                
+                // Switch book and unit to teacher's specified target
+                if (bookParam && newWorldDB[bookParam]) {
+                    currentBook = parseInt(bookParam, 10);
+                }
+                if (unitParam) {
+                    currentUnitIndex = parseInt(unitParam, 10);
+                }
+
+                // Show Join Name Prompt Modal
+                showStudentJoinModal(activeStudentRoom);
+            }
+        }
+
+        function showStudentJoinModal(pin) {
+            const pinDisplay = document.getElementById('join-pin-display');
+            if (pinDisplay) pinDisplay.innerText = pin;
+
+            const unitDisplay = document.getElementById('join-unit-display');
+            const bookTitle = (newWorldDB && newWorldDB[currentBook]) ? newWorldDB[currentBook].title : 'New World';
+            const unit = (newWorldDB && newWorldDB[currentBook] && newWorldDB[currentBook].units[currentUnitIndex]) 
+                ? newWorldDB[currentBook].units[currentUnitIndex] : { u: 1, title: '' };
+            if (unitDisplay) unitDisplay.innerText = `${bookTitle} • Unit ${unit.u}: ${unit.title}`;
+
+            // Automatically hide Landing Page overlay
+            const landingOverlay = document.getElementById('landing-page-overlay');
+            if (landingOverlay) landingOverlay.classList.add('hidden');
+
+            const joinModal = document.getElementById('classroom-join-modal');
+            if (joinModal) joinModal.classList.add('active');
+
+            const inputEl = document.getElementById('input-student-name');
+            if (inputEl) {
+                setTimeout(() => inputEl.focus(), 300);
+            }
+        }
+
+        function confirmStudentJoin() {
+            playChime('click');
+            const inputEl = document.getElementById('input-student-name');
+            const nameVal = inputEl ? inputEl.value.trim() : '';
+
+            if (!nameVal) {
+                alert('กรุณากรอกชื่อของคุณก่อนเข้าร่วมห้องเรียนครับ');
+                return;
+            }
+
+            currentStudentName = nameVal;
+            const joinModal = document.getElementById('classroom-join-modal');
+            if (joinModal) joinModal.classList.remove('active');
+
+            // Setup Student Top Bar
+            const bar = document.getElementById('student-classroom-bar');
+            if (bar) {
+                bar.style.display = 'flex';
+                document.getElementById('student-bar-pin').innerText = 'PIN: ' + activeStudentRoom;
+                document.getElementById('student-bar-name').innerText = '| นักเรียน: ' + currentStudentName;
+            }
+
+            // Sync joined status to host
+            broadcastStudentUpdate({
+                room: activeStudentRoom,
+                name: currentStudentName,
+                status: 'joined',
+                score: 0,
+                total: 5,
+                timeSec: 0,
+                updatedAt: Date.now()
+            });
+
+            // Focus on Exam Hub (Pillar 3)
+            selectTool(3);
+        }
+
+        function broadcastStudentUpdate(payload) {
+            // 1. BroadcastChannel
+            try {
+                if (typeof BroadcastChannel !== 'undefined') {
+                    const bc = new BroadcastChannel('nw_classroom_channel_' + payload.room);
+                    bc.postMessage(payload);
+                }
+            } catch(e){}
+
+            // 2. Storage Event
+            try {
+                const key = getRoomStorageKey(payload.room);
+                let list = JSON.parse(localStorage.getItem(key)) || [];
+                const idx = list.findIndex(r => r.name === payload.name);
+                if (idx >= 0) list[idx] = payload;
+                else list.push(payload);
+                localStorage.setItem(key, JSON.stringify(list));
+            } catch(e){}
+
+            // 3. Telemetry Webhook (Google Sheets)
+            sendTelemetry({
+                sessionId: telemetrySessionId,
+                device: getDeviceType(),
+                book: (newWorldDB && newWorldDB[currentBook]) ? newWorldDB[currentBook].title : 'New World',
+                unit: `Unit ${currentUnitIndex + 1}`,
+                pillar: 'Live Classroom',
+                durationSec: payload.timeSec || 0,
+                action: 'classroom_student_event',
+                details: `[Room ${payload.room}] นักเรียน: ${payload.name} | สถานะ: ${payload.status} | คะแนน: ${payload.score}/${payload.total}`
+            });
+        }
+
+        function submitCurrentScoreToHost() {
+            if (!activeStudentRoom || !currentStudentName) {
+                alert('คุณยังไม่ได้อยู่ในห้องเรียนสด');
+                return;
+            }
+            playChime('click');
+            const unitKey = currentBook + '_' + currentUnitIndex;
+            const answers = userExamAnswers[unitKey] || [];
+            const correctCount = answers.filter(a => a && a.isCorrect).length;
+
+            broadcastStudentUpdate({
+                room: activeStudentRoom,
+                name: currentStudentName,
+                status: 'completed',
+                score: correctCount,
+                total: 5,
+                timeSec: Math.round((Date.now() - telemetrySectionStartTime) / 1000),
+                updatedAt: Date.now()
+            });
+
+            alert(`✅ ส่งคะแนนขึ้นหน้าจอครูเรียบร้อยแล้ว!\\nนักเรียน: ${currentStudentName}\\nคะแนน: ${correctCount} / 5 ข้อ`);
+        }
+
+        function leaveClassroomRoom() {
+            if (confirm('คุณต้องการออกจากห้องเรียนกลุ่มสดและกลับสู่โหมดเรียนรู้ตามปกติใช่หรือไม่?')) {
+                playChime('click');
+                activeStudentRoom = null;
+                currentStudentName = null;
+                const bar = document.getElementById('student-classroom-bar');
+                if (bar) bar.style.display = 'none';
+
+                // Remove URL search params cleanly without reload
+                if (window.history && window.history.replaceState) {
+                    const cleanUrl = window.location.pathname;
+                    window.history.replaceState({}, document.title, cleanUrl);
+                }
+            }
+        }
+
+
         function updateSidebarUI() {
             for (let b = 1; b <= 6; b++) {
                 const el = document.getElementById('sidebar-book-' + b);
@@ -13509,9 +14350,12 @@ let currentBook = 1;
         }
 
         function appInit() {
+            applyLanguageToUI();
             updateSidebarUI();
             populateVoiceList();
             populateUnitDropdown();
+            checkUrlClassroomParameters();
+            initClassroomSync();
             renderWorkspace();
         }
 
@@ -13594,5 +14438,164 @@ let currentBook = 1;
             </div>
         </div>
     </div>
+
+    <!-- ============================================================== -->
+    <!-- --- Modal 1: Live Classroom Host Dashboard (v1.4.0) --- -->
+    <!-- ============================================================== -->
+    <div id="classroom-host-modal" class="classroom-host-modal" onclick="closeClassroomHostModalOnBackdrop(event)">
+        <div class="classroom-host-card">
+            <div class="classroom-host-header">
+                <div>
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <span style="background:#ef4444; color:#fff; font-size:0.75rem; font-weight:800; padding:3px 10px; border-radius:20px;">LIVE HOST</span>
+                        <h2 style="margin:0; font-size:1.35rem; color:#ffffff;" id="txt-host-title">👨‍🏫 ศูนย์ควบคุมห้องเรียนสด (Live Classroom)</h2>
+                    </div>
+                    <div style="font-size:0.88rem; color:#94a3b8; margin-top:4px;" id="host-room-subtext">
+                        กำลังสอน: New World 1 • Unit 1
+                    </div>
+                </div>
+                <button class="btn-close-modal" onclick="closeClassroomHostModal()" style="color:#ffffff;">✕</button>
+            </div>
+            <div class="classroom-host-body">
+                <!-- Top Section: PIN & QR Card -->
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:20px; align-items:center; background:#f8fafc; border:1px solid #e2e8f0; border-radius:16px; padding:20px;">
+                    <div style="text-align:center;">
+                        <div style="font-size:0.85rem; font-weight:700; color:#64748b; text-transform:uppercase; letter-spacing:1px;" id="txt-host-pin-label">รหัสห้องเรียน (Room PIN)</div>
+                        <div id="host-pin-display" style="font-size:2.6rem; font-weight:900; color:#2563eb; letter-spacing:3px; font-family:monospace; margin:4px 0;">NW-0000</div>
+                        <div style="font-size:0.84rem; color:#475569;" id="txt-host-qr-desc">ให้นักเรียนสแกน QR Code เพื่อเข้าห้องเรียนนี้โดยอัตโนมัติ</div>
+                        <div style="margin-top:14px; display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
+                            <button class="btn-primary" onclick="openProjectorMode()" style="background:#2563eb; font-size:0.95rem; padding:10px 20px; box-shadow:0 4px 12px rgba(37,99,235,0.3);">
+                                📺 <span id="txt-host-btn-proj">ขยายขึ้นจอทีวี/โปรเจกเตอร์</span>
+                            </button>
+                            <button class="btn-outline" onclick="copyJoinLink()" style="font-size:0.88rem; padding:10px 16px;">
+                                📋 <span id="txt-host-btn-copy">คัดลอกลิงก์</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div style="text-align:center;">
+                        <div style="display:inline-block; background:#ffffff; padding:12px; border-radius:14px; border:2px solid #e2e8f0; box-shadow:0 4px 12px rgba(0,0,0,0.06);">
+                            <img id="host-qr-preview-img" src="" alt="Classroom QR Code" style="width:180px; height:180px; display:block;">
+                        </div>
+                        <div style="font-size:0.78rem; color:#64748b; margin-top:6px;" id="host-join-url-label">https://doit-on.github.io/new-world-hub/?room=...</div>
+                    </div>
+                </div>
+
+                <!-- Scoreboard & Joined Students Table -->
+                <div style="margin-top:24px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                        <div>
+                            <h3 style="margin:0; font-size:1.15rem; color:#1e293b;" id="txt-scoreboard-title">📊 กระดานคะแนนสดเฉพาะครั้ง (Live Scoreboard)</h3>
+                            <span style="font-size:0.84rem; color:#64748b;" id="host-student-count-badge">มีนักเรียนในห้อง: 0 คน</span>
+                        </div>
+                        <div style="display:flex; gap:8px;">
+                            <button class="btn-outline" onclick="refreshClassroomScoreboard()" style="font-size:0.84rem; padding:6px 14px;">
+                                🔄 <span id="txt-host-refresh">รีเฟรช</span>
+                            </button>
+                            <button class="btn-outline" onclick="clearClassroomScores()" style="color:#ef4444; border-color:#fca5a5; font-size:0.84rem; padding:6px 14px;">
+                                🗑️ <span id="txt-host-clear">ล้างคะแนนรอบนี้</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div style="overflow-x:auto;">
+                        <table class="scoreboard-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:50px;">#</th>
+                                    <th id="th-student-name">ชื่อนักเรียน (Student)</th>
+                                    <th id="th-progress">สถานะ (Status)</th>
+                                    <th id="th-score">คะแนนข้อสอบ (Exam Score)</th>
+                                    <th id="th-time">เวลาที่ใช้ (Time)</th>
+                                    <th id="th-sync">อัปเดตล่าสุด</th>
+                                </tr>
+                            </thead>
+                            <tbody id="host-scoreboard-tbody">
+                                <tr>
+                                    <td colspan="6" style="text-align:center; padding:30px; color:#94a3b8;" id="txt-no-students">
+                                        ⏳ กำลังรอนักเรียนสแกน QR Code หรือกรอก PIN เข้าร่วมห้อง...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div style="background:#f8fafc; border-top:1px solid #e2e8f0; padding:14px 24px; display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:0.82rem; color:#64748b;" id="txt-host-footer-note">
+                    💡 ระบบคะแนนสดนี้สร้างขึ้นเฉพาะครั้ง (Session-based) เพื่อกิจกรรมในคาบเรียน ไม่มีการเก็บคะแนนถาวรผูกมัดผู้เรียน
+                </span>
+                <button class="btn-outline" onclick="closeClassroomHostModal()" style="font-weight:700;">
+                    ปิดหน้าต่าง
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- --- Modal 2: Fullscreen Projector / TV Theater View (v1.4.0) --- -->
+    <!-- ============================================================== -->
+    <div id="classroom-projector-modal" class="projector-theater-modal">
+        <button class="btn-close-projector" onclick="closeProjectorMode()">✕ ย่อหน้าต่าง (Exit Projector)</button>
+        <div class="projector-content">
+            <div style="display:flex; justify-content:center; align-items:center; gap:12px; margin-bottom:8px;">
+                <img src="3.png" alt="ทวพ" style="width:48px; height:48px; border-radius:10px;">
+                <h1 style="margin:0; font-size:clamp(1.6rem, 3.5vw, 2.5rem); color:#ffffff;" id="txt-proj-title">New World Smart Learning Hub</h1>
+            </div>
+            <p style="font-size:clamp(0.95rem, 1.8vw, 1.3rem); color:#94a3b8; margin:0;" id="proj-unit-subtitle">
+                ห้องเรียนกลุ่มสด • สแกนเพื่อเข้าทำกิจกรรมพร้อมกัน
+            </p>
+
+            <div class="projector-pin-banner" id="projector-pin-text">PIN: NW-0000</div>
+
+            <div class="projector-qr-container">
+                <img id="projector-qr-large-img" class="projector-qr-img" src="" alt="Projector QR Code">
+            </div>
+
+            <div style="font-size:clamp(1rem, 2vw, 1.4rem); color:#e2e8f0; line-height:1.6; margin-top:10px;">
+                <div>📱 <strong>หยิบมือถือหรือแท็บเล็ต</strong> ➔ เปิดกล้องสแกน QR Code ทันที</div>
+                <div style="font-size:clamp(0.85rem, 1.5vw, 1.1rem); color:#38bdf8; margin-top:4px;" id="projector-direct-url">
+                    หรือเข้าเว็บไซต์: https://doit-on.github.io/new-world-hub/
+                </div>
+            </div>
+
+            <div style="margin-top:24px; display:inline-flex; align-items:center; gap:10px; background:rgba(255,255,255,0.08); padding:10px 24px; border-radius:30px; border:1px solid rgba(255,255,255,0.15);">
+                <span style="font-size:1.4rem;">👥</span>
+                <span style="font-size:1.15rem; font-weight:700; color:#34d399;" id="proj-student-counter">
+                    นักเรียนที่เข้าร่วมแล้ว: 0 คน
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- --- Modal 3: Student Join Prompt Modal (v1.4.0) --- -->
+    <!-- ============================================================== -->
+    <div id="classroom-join-modal" class="classroom-host-modal">
+        <div class="classroom-host-card" style="max-width:480px;">
+            <div class="classroom-host-header" style="background:linear-gradient(135deg, #2563eb, #1d4ed8);">
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <span style="font-size:1.4rem;">🎉</span>
+                    <h3 style="margin:0; font-size:1.25rem; color:#fff;" id="txt-join-title">เข้าร่วมห้องเรียนกลุ่มสด</h3>
+                </div>
+            </div>
+            <div class="classroom-host-body" style="padding:28px 24px; text-align:center;">
+                <div style="font-size:0.95rem; color:#475569;" id="txt-join-sub">คุณกำลังเข้าร่วมห้องเรียนรหัส:</div>
+                <div id="join-pin-display" style="font-size:2.2rem; font-weight:900; color:#2563eb; letter-spacing:2px; font-family:monospace; margin:8px 0;">NW-0000</div>
+                <div id="join-unit-display" style="font-size:0.9rem; font-weight:700; color:#059669; margin-bottom:20px;">New World 1 • Unit 1</div>
+
+                <div style="text-align:left; margin-bottom:20px;">
+                    <label style="display:block; font-size:0.88rem; font-weight:700; color:#1e293b; margin-bottom:6px;" id="txt-join-name-label">
+                        พิมพ์ชื่อเล่น หรือชื่อ-เลขที่ของคุณ:
+                    </label>
+                    <input type="text" id="input-student-name" placeholder="เช่น น้องนัท (ม.1/2 เลขที่ 5)" style="width:100%; padding:12px 14px; border:2px solid #cbd5e1; border-radius:10px; font-size:1rem; font-family:'Sarabun',sans-serif; outline:none; box-sizing:border-box;">
+                </div>
+
+                <button class="btn-primary" onclick="confirmStudentJoin()" style="width:100%; padding:14px; font-size:1.05rem; background:#2563eb; box-shadow:0 4px 12px rgba(37,99,235,0.35);">
+                    🚀 <span id="txt-join-confirm-btn">เข้าร่วมห้องเรียนทันที</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
